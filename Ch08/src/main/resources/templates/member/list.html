@@ -6,7 +6,7 @@
 </head>
 <body>
 	<h3>직원목록</h3>
-	<a href="/ch08/member/list">직원등록</a>
+	<a th:href="@{/member/register}">직원등록</a>
 	<table border="1"> 
 		<tr>
 			<th>아이디</th>
@@ -17,20 +17,19 @@
 			<th>입사일</th>
 			<th>기타</th>
 		</tr>
-		<c:forEach var="member" items="${members}">
-			<tr>
-				<td>${member.uid}</td>
-				<td>${member.name}</td>
-				<td>${member.hp}</td>
-				<td>${member.pos}</td>
-				<td>${member.dep}</td>
-				<td>${member.rdate.substring(2,10)}</td>
+		<tr th:each="member:${members}">
+				<td>[[${member.uid}]]</td>
+				<td>[[${member.name}]]</td>
+				<td>[[${member.hp}]]</td>
+				<td>[[${member.pos}]]</td>
+				<td>[[${member.dep}]]</td>
+				<td>[[${member.rdate}]]</td>
 				<td>
-					<a href="/ch05/member/modify.do?uid=${member.uid}">수정</a>
-					<a href="/ch05/member/delete.do?uid=${member.uid}">삭제</a>
+					<a th:href="@{/member/modify(uid=${member.uid})}">수정</a>
+					<a th:href="@{/member/delete(uid=${member.uid})}">삭제</a>
 				</td>
-			</tr>
-		</c:forEach>
+		</tr>
+			
 	</table>
 </body>
 </html>
