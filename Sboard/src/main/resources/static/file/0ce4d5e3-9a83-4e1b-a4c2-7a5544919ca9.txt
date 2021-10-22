@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>회원가입</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script th:src="@{/js/zipcode.js}"></script>
+    
+    <script>
+	  
+	    
+    	$(function(){
+				$('input[name=uid]').focusout(function(){
+					// alert('포커스아웃!');
+					// 입력한 아이디 가져오기
+					var uid = $(this).val();
+					// Json데이터 생성 
+					var jsonData = {'uid': uid}; // json은 자바스크립트 문법 객체표현 키:값 형식 get방식으로 보낼 키와 값을 지정해준다. 
+					// ajax 통신 			
+					$.ajax({
+						url: '/member/checkUid', // 요청할 주소
+						type: 'get', // 요청방식
+						data: jsonData, // 서버로부터 보내는 데이터 옵션 
+						dataType:'json', // 서버로 부터 전송받는 데이터 형식 일반적인 타입은 json
+						success:function(data){ // data 객체의 멤버 result값을 가져올것이다.
+							// alert(data.result); 
+							if(data.result == 1){
+								$('.resultId').css('color','red').text('이미 아이디가 존재합니다.');
+							}else{
+								$('.resultId').css('color','green').text('사용가능한 아이디입니다.');
+							}
+							//alert(data.result);
+							
+						} // 서버로부터 전송받는 데이터를 성공적으로 받았을 경우 
+					});
+				});
+				$('input[name=pass2]').focusout(function(){
+					var pass1 = $('input[name=pass1]').val();
+					var pass2 = $(this).val();
+					if(pass1 == pass2){
+						$('.resultPass').css('color','green').text('비밀번호가 일치합니다.');
+					}else{
+						$('.resultPass').css('color','red').text('비밀번호가 일치하지 않습니다.');
+					}
+				});
+				
+				$('input[name=nick]').focusout(function(){
+					var nick = $(this).val();
+					var jsonData = {'nick': nick };
+					$.ajax({
+						url:'/member/checkNick',
+						type:'get',
+						data: jsonData,
+						dataType:'json',
+						success:function(data){
+							if(data.result == 1){
+								$('.resultNick').css('color','red').text('이미 닉네임이 존재합니다.');
+							}else{
+								$('.resultNick').css('color','green').text('사용가능한 닉네임입니다.');
+							}
+						}		
+					});	
+				});
+					
+		});
+    </script>
+    
+    
+</head>
+<body>
+    <div id="wrapper">
+        <section id="user" class="register">
+            <form th:action="@{/member/register}" method="POST">
+                <table border="1">
+                    <caption>사이트 이용정보 입력</caption>
+                    <tr>
+                        <td>아이디</td>
+                        <td>
+                            <input type="text" name="uid" placeholder="아이디 입력"/>
+                            <span class="resultId"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>비밀번호</td>
+                        <td>
+                            <input type="password" name="pass1" placeholder="비밀번호 입력"/>                            
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>비밀번호 확인</td>
+                        <td>
+                            <input type="password" name="pass2" placeholder="비밀번호 확인 입력"/>
+                            <span class="resultPass"></span>
+                        </td>
+                    </tr>
+                </table>
+                <table border="1">
+                    <caption>개인정보 입력</caption>
+                    <tr>
+                        <td>이름</td>
+                        <td>
+                            <input type="text" name="name" placeholder="이름 입력"/>                            
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>별명</td>
+                        <td>
+                            <p>공백없이 한글, 영문, 숫자만 입력가능</p>
+                            <input type="text" name="nick" placeholder="별명 입력"/>
+                            <span class="resultNick"></span>                            
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>E-Mail</td>
+                        <td>
+                            <input type="email" name="email" placeholder="이메일 입력"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>휴대폰</td>
+                        <td>
+                            <input type="text" name="hp" placeholder="- 포함 13자리 입력" minlength="13" maxlength="13" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>주소</td>
+                        <td>
+                            <div>
+                                <input type="text" id="zip" name="zip" placeholder="우편번호" readonly/>
+                                <button type="button" class="btnZip" onclick="zipcode()">주소검색</button>
+                            </div>                            
+                            <div> <!-- 여기서 id값은 주소값을 셋팅하기위해서 제이쿼리문을 사용하도록 설정하는 값이다. -->
+                                <input type="text" id="add1" name="add1" placeholder="주소를 검색하세요." readonly/>
+                            </div>
+                            <div>
+                                <input type="text" id="add2" name="add2" placeholder="상세주소를 입력하세요."/>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+
+                <div>
+                    <a th:href="@{/member/login}" class="btnCancel">취소</a>
+                    <input type="submit"   class="btnJoin" value="회원가입"/>
+                </div>
+
+            </form>
+        </section>
+    </div>    
+</body>
+</html>
