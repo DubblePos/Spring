@@ -117,17 +117,17 @@ public class BoardController {
 	
 	@PostMapping("/modify")
 	public String modify(ArticleVo vo) {
-		service.updateArticle(vo);
+		
 		if(vo.getFname().isEmpty()) {
 			// 파일을 첨부안했을 때
 			vo.setFile(0);
-			service.insertArticle(vo);
+			service.updateArticle(vo);
 			System.out.println("파일 첨부안함");
 		}else {
 			// 파일을 첨부했을 때
 			vo.setFile(1);
 			int seq = vo.getSeq();
-			seq = service.insertArticle(vo);
+			seq = service.updateArticle(vo);
 			FileVo fvo = service.fileUpload(vo.getFname(), seq);
 			service.insertFile(fvo);
 		}
@@ -148,6 +148,12 @@ public class BoardController {
 	public String comment(ArticleVo vo) {
 		service.insertComment(vo);
 		return "redirect:/view?seq="+vo.getParent();
+	}
+	
+	@GetMapping("/deleteComment")
+	public String deleteComment(int seq, int parent) {
+		service.deleteComment(seq);
+	return "redirect:/view?seq="+parent;	
 	}
 	
 }

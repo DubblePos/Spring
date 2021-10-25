@@ -71,6 +71,10 @@ public class BoardService {
 		dao.insertComment(vo);
 	}
 	
+	public void deleteComment(int seq) {
+		dao.deleteComment(seq);
+	}
+	
 	///////////////////// 비즈니스 처리 로직 구현 메서드 ///////////////////
 	// 파일 업로드
 	public FileVo fileUpload(MultipartFile fname, int seq) {

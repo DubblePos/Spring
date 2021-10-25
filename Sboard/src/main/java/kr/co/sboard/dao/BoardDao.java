@@ -24,4 +24,5 @@ public interface BoardDao {
 	public void deleteArticle(int seq);
 	
 	public void insertComment(ArticleVo vo);
+	public void deleteComment(int seq);
 }

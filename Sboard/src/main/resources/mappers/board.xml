@@ -90,4 +90,8 @@
   	<delete id="deleteArticle">
   		DELETE FROM `Jboard_article` WHERE `seq`=#{seq};
   	</delete>
+  	
+  	<delete id="deleteComment">
+  		DELETE FROM `Jboard_article` WHERE `seq`=#{seq};
+  	</delete>
 </mapper>
