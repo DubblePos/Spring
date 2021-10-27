@@ -17,16 +17,17 @@ public class BoardController {
 	}
 	
 	@GetMapping("/board/write")
-	public String write(Model model, String group) {
-		
+	public String write(Model model, String group, String cate) {
+		model.addAttribute("cate", cate);
 		model.addAttribute("group", group);
 		return "/board/write";
 	}
 	
 	@GetMapping("/board/view")
-	public String view(Model model, String group) {
+	public String view(Model model, String group, String cate) {
 		
 		model.addAttribute("group", group);
+		model.addAttribute("cate", cate);
 		
 		return "/board/view";
 	}
