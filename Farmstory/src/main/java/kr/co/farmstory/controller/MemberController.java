@@ -41,6 +41,13 @@ public class MemberController {
 		
 	}
 	
+	@GetMapping("/member/logout")
+	public String logout(HttpSession sess) {
+		// 현재 사용자 정보객체 세션삭제
+		sess.invalidate();
+		return "redirect:/member/login?success=102";
+	}
+	
 	@GetMapping("/member/terms")
 	public String terms(Model medel) {
 		
