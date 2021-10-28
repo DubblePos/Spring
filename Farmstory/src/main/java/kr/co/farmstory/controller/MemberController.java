@@ -24,6 +24,8 @@ public class MemberController {
 	
 	@GetMapping("/member/login")
 	public String login() {
+		
+		
 		return "/member/login";
 	}
 	
@@ -33,6 +35,7 @@ public class MemberController {
 		
 		if(vo == null) {
 			return "/member/login?success=100";
+			
 		}else {
 			
 			sess.setAttribute("sessMember", vo);
