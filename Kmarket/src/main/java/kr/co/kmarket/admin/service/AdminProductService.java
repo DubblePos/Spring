@@ -47,14 +47,9 @@ public class AdminProductService {
 		File file = new File("src/main/resources/static/thumb/");
 	    String path = file.getAbsolutePath();
 
-	    MultipartFile[] files = {vo.getThumbFile1(),
-					    		 vo.getThumbFile2(),
-					    		 vo.getThumbFile3(),
-					    		 vo.getDetailFile4()};
-	    
 	    int i = 0;
 	    
-	    for(MultipartFile mf : files) {
+	    for(MultipartFile mf : vo.getFiles()) {
 	    	
 	    	if(!mf.isEmpty()) {
 		    	// 썸네일 이미지 파일을 첨부했다면
