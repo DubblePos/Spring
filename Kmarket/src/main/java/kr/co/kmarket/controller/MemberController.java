@@ -1,6 +1,7 @@
 package kr.co.kmarket.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,6 +27,25 @@ public class MemberController {
 	@GetMapping("/member/login")
 	public String login() {
 		return "/member/login";
+	}
+	
+	@PostMapping("/member/login")
+	public String login(MemberVo vo, HttpSession sess) {
+		
+		MemberVo memberVo = service.selectMember(vo);
+		
+		if(memberVo != null) {
+			sess.setAttribute("sessMember", memberVo);			
+			return "redirect:/";
+		}else {
+			return "redirect:/member/login?success=100";
+		}
+	}
+	
+	@GetMapping("/member/logout")
+	public String logout(HttpSession sess) {
+		sess.invalidate();
+		return "redirect:/";
 	}
 	
 	@GetMapping("/member/register")

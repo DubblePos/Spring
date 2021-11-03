@@ -16,11 +16,17 @@ public class MemberService {
 	public void insertMember(MemberVo vo) {
 		dao.insertMember(vo);
 	}
-	public void selectMember() {}
+	
+	public MemberVo selectMember(MemberVo vo) {
+		return dao.selectMember(vo);
+	}
+	
 	public void selectMembers() {}
+	
 	public MemberTermsVo selectTerms() {
 		return dao.selectTerms();
 	}
+	
 	public void updateMember() {}
 	public void deleteMember() {}
 }

@@ -10,20 +10,66 @@
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <link rel="stylesheet" th:href="@{/admin/css/admin.css}">
+    <script>
+    
+    	$(function(){
+    		
+    		var select1 = $('select[name=category1]');
+    		var select2 = $('select[name=category2]');
+    		
+    		
+    		// 1차 카테고리 생성
+    		$.get('/admin/product/getCate1', function(data){
+    			/*
+    			for(var i=0; i<data.length; i++){
+    				select1.append("<option value='"+data[i].cate1+"'>"+data[i].title+"</option>");	
+    			}
+    			*/
+    			$.each(data, function(i, vo){ //data 값이 인덱스번호 값 두개니깐 i(index), vo 두개 지정해줌
+    				select1.append("<option value='"+vo.cate1+"'>"+vo.title+"</option>");
+    			});
+    			
+    		});
+    		/* $.ajax({
+    			url : '/admin/product/cate1',
+    			type: 'get',
+    			dataType:'json',
+    			success: function(data){}
+    		}); */
+    		
+    		// 1차 카테고리 선택 후 2차 카테고리 생성
+    		// 사용자의 액션에 반응하는 함수를 event라고 함
+    		select1.change(function(){
+    			
+    			var cate1 = $(this).val();
+    			var jsonData = {'cate1':cate1};
+    			
+    			$.get('/admin/product/getCate2', jsonData, function(data){
+    				
+    				select2.empty();
+    				select2.append("<option value='0'>2차 분류 선택</option>");
+    				
+    				$.each(data, function(i, vo){ //data 값이 인덱스번호 값 두개니깐 i(index), vo 두개 지정해줌
+        				select2.append("<option value='"+vo.cate2+"'>"+vo.title+"</option>");
+        			});
+    				
+    			});
+    			 /*$.ajax({
+    	    			url : '/admin/product/getCate2',
+    	    			type: 'get',
+    	    			data:jsonData,
+    	    			dataType:'json',
+    	    			success: function(data){}
+    	    		});*/
+    		});
+    	});
+    
+    </script>
+    
 </head>
 <body>
     <div id="admin-wrapper">
-        <header>
-            <div>
-                <a th:href="@{/admin/index.html}" class="logo"><img th:src="@{/admin/img/admin_logo.png}" alt="admin_logo"/></a>
-                <p>
-                    <span>홍길동님 반갑습니다.</span>
-                    <a href="#">HOME |</a>
-                    <a href="#">로그아웃 |</a>
-                    <a href="#">고객센터</a>
-                </p>
-            </div>
-        </header>
+        <th:block th:include="@{/admin/_header.html}"></th:block>
         <main>
             <aside>
                 <!-- Global Navigation Bar -->
@@ -99,11 +145,7 @@
                                     <td>1차 분류</td>
                                     <td>
                                         <select name="category1">
-                                            <option value="cate0">1차 분류 선택</option>
-                                            <option value="cate11">패션·의류·뷰티</option>
-                                            <option value="cate12">가전·디지털</option>
-                                            <option value="cate13">식품·생필품</option>
-                                            <option value="cate14">홈·문구·취미</option>                                                
+                                            <option value="0">1차 분류 선택</option>
                                         </select>
                                     </td>
                                 </tr>
@@ -111,11 +153,7 @@
                                     <td>2차 분류</td>
                                     <td>
                                         <select name="category2">
-                                            <option value="cate0">2차 분류 선택</option>
-                                            <option value="cate21">남성의류</option>
-                                            <option value="cate22">여성의류</option>
-                                            <option value="cate23">잡화</option>
-                                            <option value="cate24">뷰티</option>                                                
+                                            <option value="0">2차 분류 선택</option>
                                         </select>
                                     </td>
                                 </tr>
@@ -285,11 +323,7 @@
                 <!-- 상품등록 컨텐츠 끝 -->
             </section>
         </main>
-        <footer>
-            <div>
-                <p>Copyright ©kmarket.co.kr All rights reserved. KMARKET ADMINISTRATOR Version 5.4.1.2</p>
-            </div>
-        </footer>
+       <th:block th:include="@{/admin/_footer.html}"></th:block>
     </div>    
 </body>
 </html>

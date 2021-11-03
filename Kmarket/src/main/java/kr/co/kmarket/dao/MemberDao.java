@@ -9,7 +9,7 @@ import kr.co.kmarket.vo.MemberVo;
 public interface MemberDao {
 
 	public void insertMember(MemberVo vo);
-	public void selectMember();
+	public MemberVo selectMember(MemberVo vo);
 	public void selectMembers();
 	public MemberTermsVo selectTerms();
 	public void updateMember();
