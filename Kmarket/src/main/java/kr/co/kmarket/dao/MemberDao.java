@@ -15,6 +15,14 @@ public interface MemberDao {
 	public void updateMember();
 	public void deleteMember();
 	
+	public int selectCountUid(String uid);
+	
+	public int selectCountNick(String nick);
+	
+	public int selectCountEmail(String email);
+	
+	public int selectCountHp(String hp);
+	
 }
 
 
