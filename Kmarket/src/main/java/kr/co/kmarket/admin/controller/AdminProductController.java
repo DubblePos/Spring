@@ -2,14 +2,18 @@ package kr.co.kmarket.admin.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.kmarket.admin.service.AdminProductService;
 import kr.co.kmarket.vo.ProductCate1Vo;
 import kr.co.kmarket.vo.ProductCate2Vo;
+import kr.co.kmarket.vo.ProductVo;
 
 @Controller
 public class AdminProductController {
@@ -27,6 +31,19 @@ public class AdminProductController {
 		return "/admin/product/register";
 	}
 	
+	@PostMapping("/admin/product/register")
+	public String register(ProductVo vo, HttpServletRequest req) {
+		
+		vo.setIp(req.getRemoteAddr());
+		
+		// 썹네일 이미지 업로드
+		vo = service.fileUpload(vo);
+		
+		// 상품 정보 INSERT
+		service.insertProduct(vo);
+		
+		return "/admin/product/register";
+	}
 	
 	//스프링부트는 젝슨이 내장되어있기때문에 리턴을 cate1로 해도 알아서 해줌!?
 	@ResponseBody
