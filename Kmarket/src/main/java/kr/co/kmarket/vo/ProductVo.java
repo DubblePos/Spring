@@ -43,15 +43,20 @@ public class ProductVo {
 	public String etc4;
 	public String etc5;	
 	
+	// 추가필드 l
+	private int salePrice;
 	
-	// 추가필드
+	// 추가필드 ll
 	private MultipartFile thumbFile1;
 	private MultipartFile thumbFile2;
 	private MultipartFile thumbFile3;
 	private MultipartFile detailFile4;
 	
+	
+	
 	public List<MultipartFile> getFiles(){
 		List<MultipartFile> files = Arrays.asList(thumbFile1, thumbFile2, thumbFile3, detailFile4);
 		return files;
 	}
+	
 }

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.kmarket.service.MainService;
 import kr.co.kmarket.vo.CategoriesVo;
+import kr.co.kmarket.vo.ProductVo;
 
 @Controller
 public class MainController {
@@ -19,6 +20,20 @@ public class MainController {
 	
 	@GetMapping(value = {"/", "/index"})
 	public String index(Model model) {
+		
+		// 메인상품 조회
+		
+		List<ProductVo> productsHit 		= service.selectMainProduct("hit");
+		List<ProductVo> productsRecommend 	= service.selectMainProduct("score");
+		List<ProductVo> productsLatest		= service.selectMainProduct("rdate");
+		List<ProductVo> productsDiscount 	= service.selectMainProduct("discount");
+		List<ProductVo> productsBest 		= service.selectMainProduct("sold");
+		
+		model.addAttribute("productsHit", productsHit);
+		model.addAttribute("productsRecommend", productsRecommend);
+		model.addAttribute("productsLatest", productsLatest);
+		model.addAttribute("productsDiscount", productsDiscount);
+		model.addAttribute("productsBest", productsBest);
 		
 		//List<CategoriesVo> cates = service.selectCategories();
 		
