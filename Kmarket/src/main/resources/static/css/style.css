@@ -594,6 +594,8 @@ h5.rating.star5 {background-position: 0 -200px;}
     border-right: 1px solid #ddd;
 }
 
+#list > .sort > li > a.on {font-weight: bold;}
+
 #list > section > article {
     width: 100%;
     height: 200px;

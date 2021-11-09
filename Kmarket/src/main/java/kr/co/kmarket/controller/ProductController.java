@@ -29,6 +29,7 @@ public class ProductController {
 		
 		model.addAttribute("products", products);
 		model.addAttribute("cateVo", cateVo);
+		model.addAttribute("order", vo.getOrder()); //list 오더값을 참조하기위해 사용
 		
 		return "/product/list";
 	}
