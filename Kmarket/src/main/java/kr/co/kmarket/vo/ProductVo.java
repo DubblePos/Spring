@@ -45,6 +45,9 @@ public class ProductVo {
 	
 	// 추가필드 l
 	private int salePrice;
+	private String tit1;
+	private String tit2;
+	
 	
 	// 추가필드 ll
 	private MultipartFile thumbFile1;
