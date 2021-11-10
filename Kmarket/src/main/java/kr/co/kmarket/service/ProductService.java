@@ -16,7 +16,9 @@ public class ProductService {
 	private ProductDao dao;
 	
 	public void insertProduct() {}
-	public void selectProduct() {}
+	public ProductVo selectProduct(int productCode) {
+		return dao.selectProduct(productCode);
+	}
 	public List<ProductVo> selectProducts(ProductVo vo){
 		return dao.selectProducts(vo);
 	}

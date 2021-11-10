@@ -11,7 +11,7 @@ import kr.co.kmarket.vo.ProductVo;
 public interface ProductDao {
 
 	public void insertProduct();
-	public void selectProduct();
+	public ProductVo selectProduct(int productCode);
 	public List<ProductVo> selectProducts(ProductVo vo);
 	public CategoriesVo selectCategoryTitle(ProductVo vo);
 	public void updateProduct();
