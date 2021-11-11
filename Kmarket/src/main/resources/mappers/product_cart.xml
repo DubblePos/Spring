@@ -27,5 +27,11 @@
 		ORDER BY `cartId` ASC;
 	</select>
 	<update id="updateCart"></update>
-	<delete id="deleteCart"></delete>
+	<delete id="deleteCart">
+		DELETE FROM `km_product_cart` 
+		WHERE `cartId` IN
+		<foreach collection="array" item="cartId" open="(" close=")" separator=",">
+			#{cartId}
+		</foreach>
+	</delete>
 </mapper>

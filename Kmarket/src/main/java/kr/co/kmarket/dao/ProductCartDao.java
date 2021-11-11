@@ -14,5 +14,5 @@ public interface ProductCartDao {
 	public void selectCart();
 	public List<ProductCartVo> selectCarts(String uid);
 	public void updateCart();
-	public void deleteCart();
+	public int deleteCart(int[] cartIds);
 }

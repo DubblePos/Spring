@@ -68,6 +68,18 @@ public class ProductController {
 		return new Gson().toJson(json);
 	}
 	
+	@ResponseBody
+	@GetMapping("/product/cartDelete")
+	public String cartDelete(int[] cartIds) {
+		
+		int result =cartService.deleteCart(cartIds);
+		
+		JsonObject json = new JsonObject();
+		json.addProperty("result", result);
+		
+		return new Gson().toJson(json);
+	}
+	
 	@GetMapping("/product/list")
 	public String list(ProductVo vo, Model model, String pg) {
 		

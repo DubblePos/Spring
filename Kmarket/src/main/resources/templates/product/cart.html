@@ -113,28 +113,35 @@
 				return;
 			}
 			
+			// 자바스크립트 배열
+			var cartIds = [];
+			
 			$.each(checkedProduct, function() {
 				var cartId = $(this).val();
-				alert(cartId);
+				cartIds.push(cartId); /*파이썬에서는 append 자바스크립트에서는 push*/
 			});
 			
-			var jsonData = {};
+			var jsonData = {'cartIds': cartIds};
 			
 			// 삭제 요청하기
 			$.ajax({
 				url:'/product/cartDelete',
 				type:'get',
+				traditional:true, /* 배열값 전송을 위한 옵션*/
+				data:jsonData,
 				dataType:'json',
-				success:function(data){}
+				success:function(data){
+					alert(data.result);
+				}
 			});
 			
 		});
 		
 		// 전체 체크박스 체크/해지
-		$('input[name=all]').change(function() { //is : 상태
-			if($(this).is(':checked')){ // 현재 체크되었다면
+		$('input[name=all]').change(function() { /*is : 상태*/
+			if($(this).is(':checked')){ /*현재 체크되었다면*/
 				// 전체 상품 체크박스 체크
-				$('input[name=checkProduct]').prop('checked', true); //prop:프로퍼티 속성함수, 제이쿼리 체크박스 함수 검색 ㄱㄱ싱
+				$('input[name=checkProduct]').prop('checked', true); /*prop:프로퍼티 속성함수, 제이쿼리 체크박스 함수 검색 ㄱㄱ싱*/
 				
 			}else{
 				// 전체 상품 체크박스 해지
