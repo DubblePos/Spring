@@ -13,10 +13,10 @@
     <link rel="stylesheet" th:href="@{/css/style.css}">    
 <script>
 	//장바구니 전체 집계
-	$(function() {
-		
-		var cartProduct = $('.cartProduct'); // 클래스는 . 붙이고 cartProduct
-		
+	function aggregation(){
+		var cartProduct = $('input[name=checkProduct]:checked').parent().parent();// 첫번째 parent:td, 두번째 parent:tr && 클래스는 . 붙이고 cartProduct
+	
+	
 		// 상품 수 집계
 		var countTds = cartProduct.find('.count');
 		var totCount = 0;
@@ -26,7 +26,7 @@
 			totCount += count;
 		});
 		
-		$('.info .count').text(totCount);
+		$('.info .count').text(totCount+'개');
 		
 		// 판매가 집계
 		var priceTds = cartProduct.find('.price');
@@ -38,7 +38,7 @@
 			
 		});
 		
-		$('.info .price').text(totPrice.toLocaleString());
+		$('.info .price').text(totPrice.toLocaleString()+'원');
 		
 		// 할인금액 집계
 		var discountTds = cartProduct.find('.discount');
@@ -54,7 +54,7 @@
 			
 		});
 		
-		$('.info .discount').text(totDiscount.toLocaleString());
+		$('.info .discount').text(totDiscount.toLocaleString()+'원');
 		
 		
 		// 배송비 집계
@@ -70,7 +70,7 @@
 			}
 		});
 		
-		$('.info .delivery').text(totDelivery.toLocaleString());
+		$('.info .delivery').text(totDelivery.toLocaleString()+'원');
 		
 		// 포인트 집계
 		
@@ -97,11 +97,14 @@
 			
 		});
 		
-		$('.info .total').text(totTotal.toLocaleString());
-	});
+		$('.info .total').text(totTotal.toLocaleString()+'원');
+	} // aggregaion end
 	
-	// 선택삭제
+	
 	$(function() {
+		
+		// 최초 전체 장바구니 상품 집계
+		aggregation();
 		
 		// 삭제버튼
 		$('input[name=del]').click(function() {
@@ -148,7 +151,48 @@
 				// 전체 상품 체크박스 해지
 				$('input[name=checkProduct]').prop('checked', false);
 			}
+		
+			// 집계 재조정
+			aggregation();
+		
 		});		
+		
+		// 개별 체크박스 체크/해제
+		$('input[name=checkProduct]').change(function(){
+			
+			// 집계 재조정
+			aggregation();
+		});
+		
+		// 주문하기
+		$('input[name=order]').click(function(){
+    			
+				var checkedProductCodes = $('input[name=checkProduct]:checked').next();
+    			var productCodes = [];
+    			
+    			$.each(checkedProductCodes, function(){
+    				var productCode = $(this).val();
+    				productCodes.push(productCode);	
+    			});
+
+    			alert(productCodes);
+    			
+    			return;
+    			
+    			var jsonData = {'cartIds': cartIds};
+    			
+    			$.ajax({
+    				url:'/product/order',
+    				type:'get',
+    				traditional: true, /* 배열값 전송을 위한 옵션 */
+    				data: jsonData,
+    				dataType:'json',
+    				success: function(data){
+    					
+    				}
+    			});
+		
+		});	
 	});
 	
 </script>      
@@ -178,7 +222,7 @@
                   <table>
                     <thead>
                       <tr>
-                        <th><input type="checkbox" name="all"></th>
+                        <th><input type="checkbox" name="all" checked></th>
                         <th>상품명</th>
                         <th>총수량</th>
                         <th>판매가</th>
@@ -192,7 +236,10 @@
                         <td colspan="7">장바구니에 상품이 없습니다.</td>
                       </tr>
                       <tr th:each="product:${cartProducts}" class="cartProduct">
-                        <td><input type="checkbox" name="checkProduct" th:value="${product.cartId}"></td>
+                        <td>
+                        	<input type="checkbox" name="checkProduct" th:value="${product.cartId}" checked>
+                        	<input type="hidden" name="productCode" th:value="${product.productCode}"/>
+                       	</td>
                         <td>
                           <article>
                             <a href="#">
@@ -223,30 +270,30 @@
                 <table border="0">
                   <tr>
                     <td>상품수</td>
-                    <td class="count">1</td>
+                    <td class="count">-</td>
                   </tr>
                   <tr>
                     <td>상품금액</td>
-                    <td class="price">27,000</td>
+                    <td class="price">-</td>
                   </tr>
                   <tr>
                     <td>할인금액</td>
-                    <td class="discount">-1,000</td>
+                    <td class="discount">-</td>
                   </tr>
                   <tr>
                     <td>배송비</td>
-                    <td class="delivery">0</td>
+                    <td class="delivery">-</td>
                   </tr>              
                   <tr>
                     <td>포인트</td>
-                    <td class="point">260</td>
+                    <td class="point">-</td>
                   </tr>
                   <tr>
                     <td>전체주문금액</td>
-                    <td class="total">26,000</td>
+                    <td class="total">-</td>
                   </tr>
                 </table>
-                <input type="button" name="" value="주문하기">
+                <input type="button" name="order" value="주문하기">
               </div>
             </section>
         </main>
