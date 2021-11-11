@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.kmarket.dao.ProductOrderDao">
-	<insert id="insertOrder">
+	<insert id="insertOrder" useGeneratedKeys="true" keyProperty="orderId">
 		INSERT INTO `km_product_order` SET
 		`uid`=#{uid},
 		`count`=#{count},
@@ -13,6 +13,11 @@
 		`point`=#{point},
 		`total`=#{total},
 		`rdate`=NOW();
+	</insert>
+	<insert id="insertOrderDetail">
+		INSERT INTO `km_product_order_detail` SET
+		`orderId`=#{orderId},
+		`productCode`=#{productCode};
 	</insert>
 	<select id="selectOrder"></select>
 	<select id="selectOrders"></select>

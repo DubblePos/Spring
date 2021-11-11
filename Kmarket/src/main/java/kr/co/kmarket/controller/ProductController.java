@@ -123,12 +123,17 @@ public class ProductController {
 	@PostMapping("/product/order")
 	public String order(ProductOrderVo vo) {
 		
-		orderService.insertOrder(vo);
+		// 장바구니 상품 주문 테이블 저장
+		orderService.insertOrder(vo); //vo안에 orderId가 있음
 		
-		System.out.println("vo 1 : "+vo.getUid());
-		System.out.println("vo 2 : "+vo.getCount());
-		System.out.println("vo 3 : "+vo.getPrice());
+		// 주문 테이블 Insert 후 주문번호 가져오기
+		int orderId = vo.getOrderId();
 		
+		// 주문번호 상품코드 입력하기
+		for(int productCode : vo.getProductCodes()) {
+			
+			orderService.insertOrderDetail(orderId, productCode);
+		}
 		
 		JsonObject json = new JsonObject();
 		json.addProperty("result", 1);

@@ -8,6 +8,7 @@ import kr.co.kmarket.vo.ProductOrderVo;
 public interface ProductOrderDao {
 
 	public void insertOrder(ProductOrderVo vo);
+	public void insertOrderDetail(int orderId, int productCode);
 	public void selectOrder();
 	public void selectOrders();
 	public void updateOrder();
