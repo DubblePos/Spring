@@ -1,29 +1,30 @@
 package kr.co.kmarket.vo;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
+@Data
 public class ProductOrderVo {
 
-	public int orderId;
-	public String uid;
-	public int count;
-	public int price;
-	public int discount;
-	public int point;
-	public int usePoint;
-	public int delivery;
-	public int total;
-	public String orderer;
-	public String hp;
-	public String zip;
-	public String addr1;
-	public String addr2;
-	public int payment;
-	public int complete;
-	public String rdate;
-	public String completeDate;
+	private int orderId;
+	private String uid;
+	private int count;
+	private int price;
+	private int discount;
+	private int point;
+	private int usePoint;
+	private int delivery;
+	private int total;
+	private String orderer;
+	private String hp;
+	private String zip;
+	private String addr1;
+	private String addr2;
+	private int payment;
+	private int complete;
+	private String rdate;
+	private String completeDate;
+	
+	// 추가필드
+	private int[] productCodes;
 	
 }

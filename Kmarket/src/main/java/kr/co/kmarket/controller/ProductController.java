@@ -15,10 +15,12 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 import kr.co.kmarket.service.ProductCartService;
+import kr.co.kmarket.service.ProductOrderService;
 import kr.co.kmarket.service.ProductService;
 import kr.co.kmarket.vo.CategoriesVo;
 import kr.co.kmarket.vo.MemberVo;
 import kr.co.kmarket.vo.ProductCartVo;
+import kr.co.kmarket.vo.ProductOrderVo;
 import kr.co.kmarket.vo.ProductVo;
 import kr.co.kmarket.vo.SearchVo;
 
@@ -27,9 +29,10 @@ public class ProductController {
 
 	@Autowired
 	private ProductService service;
-	
 	@Autowired
 	private ProductCartService cartService;
+	@Autowired
+	private ProductOrderService orderService;
 	
 	
 	@GetMapping("/product/cart")
@@ -72,13 +75,14 @@ public class ProductController {
 	@GetMapping("/product/cartDelete")
 	public String cartDelete(int[] cartIds) {
 		
-		int result =cartService.deleteCart(cartIds);
+		int result = cartService.deleteCart(cartIds);
 		
 		JsonObject json = new JsonObject();
 		json.addProperty("result", result);
 		
 		return new Gson().toJson(json);
 	}
+	
 	
 	@GetMapping("/product/list")
 	public String list(ProductVo vo, Model model, String pg) {
@@ -113,6 +117,23 @@ public class ProductController {
 	@GetMapping("/product/order")
 	public String order() {
 		return "/product/order";
+	}
+
+	@ResponseBody
+	@PostMapping("/product/order")
+	public String order(ProductOrderVo vo) {
+		
+		orderService.insertOrder(vo);
+		
+		System.out.println("vo 1 : "+vo.getUid());
+		System.out.println("vo 2 : "+vo.getCount());
+		System.out.println("vo 3 : "+vo.getPrice());
+		
+		
+		JsonObject json = new JsonObject();
+		json.addProperty("result", 1);
+		
+		return new Gson().toJson(json);
 	}
 	
 	@GetMapping("/product/order-complete")

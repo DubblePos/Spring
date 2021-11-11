@@ -167,28 +167,41 @@
 		// 주문하기
 		$('input[name=order]').click(function(){
     			
-				var checkedProductCodes = $('input[name=checkProduct]:checked').next();
+				var checkedProduct = $('input[name=checkProduct]:checked');
     			var productCodes = [];
     			
-    			$.each(checkedProductCodes, function(){
-    				var productCode = $(this).val();
+    			$.each(checkedProduct, function(){
+    				var productCode = $(this).data('product-code'); //접두어는 제외 'product-code' 사용자마음대로 코드
     				productCodes.push(productCode);	
     			});
 
-    			alert(productCodes);
+    			var uid 	 = $('.info input[name=uid]').val();
+    			var count	 = $('.info .count').text().replace(/(,|개)/g,'');
+   				var price 	 = $('.info .price').text().replace(/(,|원)/g,'');
+    			var discount = $('.info .discount').text().replace(/(,|원)/g,'');
+    			var delivery = $('.info .delivery').text().replace(/(,|원)/g,'');
+    			var point 	 = $('.info .point').text().replace(/(,|원)/g,'');
+    			var total 	 = $('.info .total').text().replace(/(,|원)/g,'');
     			
-    			return;
-    			
-    			var jsonData = {'cartIds': cartIds};
+    			var jsonData = {
+    					'uid': uid,
+    					'count': count,
+    					'price': price,
+    					'discount': discount,
+    					'delivery': delivery,
+    					'point': point,
+    					'total': total,
+    					'productCodes': productCodes
+    					};
     			
     			$.ajax({
     				url:'/product/order',
-    				type:'get',
-    				traditional: true, /* 배열값 전송을 위한 옵션 */
+    				type:'post',
+    				traditional: true,
     				data: jsonData,
     				dataType:'json',
     				success: function(data){
-    					
+    					alert(data.result);
     				}
     			});
 		
@@ -237,8 +250,7 @@
                       </tr>
                       <tr th:each="product:${cartProducts}" class="cartProduct">
                         <td>
-                        	<input type="checkbox" name="checkProduct" th:value="${product.cartId}" checked>
-                        	<input type="hidden" name="productCode" th:value="${product.productCode}"/>
+                        	<input type="checkbox" name="checkProduct" th:value="${product.cartId}" th:data-product-code="${product.productCode}" checked>
                        	</td>
                         <td>
                           <article>
@@ -268,6 +280,7 @@
               <div class="info">
                 <h2>전체합계</h2>
                 <table border="0">
+               	  <input type="hidden" name="uid" th:value="${session.sessMember.uid}"/>
                   <tr>
                     <td>상품수</td>
                     <td class="count">-</td>
