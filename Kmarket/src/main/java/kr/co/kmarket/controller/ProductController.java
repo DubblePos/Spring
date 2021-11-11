@@ -17,23 +17,37 @@ import com.google.gson.JsonObject;
 import kr.co.kmarket.service.ProductCartService;
 import kr.co.kmarket.service.ProductService;
 import kr.co.kmarket.vo.CategoriesVo;
+import kr.co.kmarket.vo.MemberVo;
 import kr.co.kmarket.vo.ProductCartVo;
 import kr.co.kmarket.vo.ProductVo;
+import kr.co.kmarket.vo.SearchVo;
 
 @Controller
 public class ProductController {
 
-	
-	
 	@Autowired
 	private ProductService service;
 	
 	@Autowired
 	private ProductCartService cartService;
 	
+	
 	@GetMapping("/product/cart")
-	public String cart() {
-		return "/product/cart";
+	public String cart(HttpSession sess, Model model) {
+		
+		// 로그인 여부확인
+		MemberVo vo = (MemberVo) sess.getAttribute("sessMember");
+		
+		if(vo != null) {
+			
+			List<ProductCartVo> cartProducts = cartService.selectCarts(vo.getUid());
+			model.addAttribute("cartProducts", cartProducts);
+			
+			return "/product/cart";	
+			
+		}else {
+			return "redirect:/member/login?success=201";
+		}
 	}
 	
 	@ResponseBody
@@ -43,25 +57,43 @@ public class ProductController {
 		int result = cartService.selectCountCart(vo);
 		
 		if(result == 0) {
-			cartService.insertCart(vo);
+			cartService.insertCart(vo);	
 		}
+		
+		System.out.println("result : "+result);
 		
 		JsonObject json = new JsonObject();
 		json.addProperty("result", result);
-		
 		
 		return new Gson().toJson(json);
 	}
 	
 	@GetMapping("/product/list")
-	public String list(ProductVo vo, Model model) {
+	public String list(ProductVo vo, Model model, String pg) {
+		
+		// 리스트 번호 처리
+		int currentPage = service.getCurrentPage(pg);
+		int start = service.getLimitStart(currentPage);
+		int total = service.selectProductCountTotal(vo);
+		int pageStartNum = service.getPageStartNum(total, start);
+		int lastPageNum = service.getLastPageNum(total);
+		int groups[] = service.getPageGroup(currentPage, lastPageNum);
+		
+		vo.setStart(start);
 		
 		List<ProductVo> products = service.selectProducts(vo);
 		CategoriesVo cateVo = service.selectCategoryTitle(vo);
 		
 		model.addAttribute("products", products);
 		model.addAttribute("cateVo", cateVo);
-		model.addAttribute("order", vo.getOrder()); //list 오더값을 참조하기위해 사용
+		model.addAttribute("order", vo.getOrder());
+		
+		model.addAttribute("pageStartNum", pageStartNum);
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("lastPageNum", lastPageNum);
+		model.addAttribute("groups", groups);
+		
+		
 		
 		return "/product/list";
 	}
@@ -77,12 +109,19 @@ public class ProductController {
 	}
 	
 	@GetMapping("/product/search")
-	public String search() {
+	public String search(SearchVo vo, Model model) {
+		
+		List<ProductVo> products = service.selectProductSearch(vo);
+		model.addAttribute("products", products);
+		model.addAttribute("productCount", products.size());		
+		model.addAttribute("keyword", vo.getKeyword());
+		
 		return "/product/search";
 	}
+		
 	
 	@GetMapping("/product/view")
-	public String view(int productCode, Model model) {
+	public String view(HttpSession sess, int productCode, Model model) {
 		
 		ProductVo vo = service.selectProduct(productCode);
 		model.addAttribute(vo);

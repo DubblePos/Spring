@@ -6,7 +6,7 @@
 	<insert id="insertMember">
 		INSERT INTO `km_member` SET
 		`uid`=#{uid},
-		`pass`=PASSWORD(#{uid}),
+		`pass`=PASSWORD(#{pass}),
 		`name`=#{name},
 		`gender`=#{gender},
 		`hp`=#{hp},
@@ -24,9 +24,12 @@
 		`managerHp`=#{managerHp},
 		`fax`=#{fax},
 		`ip`=#{ip},
-		`leaveDate`=#{leaveDate},
-		`rdate`=NOW();
-		
+		`rdate`=NOW(),
+		`etc1`=#{etc1},
+		`etc2`=#{etc2},
+		`etc3`=#{etc3},
+		`etc4`=#{etc4},
+		`etc5`=#{etc5};	
 	</insert>
 	<select id="selectMember" resultType="kr.co.kmarket.vo.MemberVo">
 		SELECT * FROM `km_member` WHERE `uid`=#{uid} AND `pass`=PASSWORD(#{pass});
@@ -35,20 +38,6 @@
 	<select id="selectTerms" resultType="kr.co.kmarket.vo.MemberTermsVo">
 		SELECT * FROM `km_member_terms`;
 	</select>
-	
-	<select id="selectCountUid" resultType="int">
-		SELECT COUNT(`uid`) FROM `km_member` WHERE `uid`=#{uid}; 
-	</select>
-	<select id="selectCountEmail" resultType="int">
-		SELECT COUNT(`email`) FROM `km_member` WHERE `email`=#{email};
-	</select>
-	<select id="selectCountNick" resultType="int">
-		SELECT COUNT(`nick`) FROM `km_member` WHERE `nick`=#{nick};
-	</select>
-	<select id="selectCountHp" resultType="int">
-		SELECT COUNT(`hp`) FROM `km_member` WHERE `hp`=#{hp};
-	</select>
 	<update id="updateMember"></update>
 	<delete id="deleteMember"></delete>
-	
 </mapper>

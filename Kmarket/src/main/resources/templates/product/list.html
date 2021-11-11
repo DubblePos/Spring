@@ -10,25 +10,21 @@
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
-    <link rel="stylesheet" th:href="@{/css/style.css}"/>    
+    <link rel="stylesheet" th:href="@{/css/style.css}">    
     <style>    
-
-        
-
     </style>
 </head>
 <body>
     <div id="wrapper">
-        <th:block th:include="@{/_header.html}"></th:block>
+        <th:block th:include="@{_header.html}"/>
         <main>
             <!-- 카테고리/베스트 상품 영역 -->
-           	<aside>
+            <aside>
                 <th:block th:include="@{_category.html}"/>
             </aside>
 
             <!-- 상품목록 -->
             <section id="list">
-              
               <!-- 제목, 페이지 네비게이션 -->
               <nav>
                 <h1>[[${cateVo.tit2}]] 상품리스트</h1>
@@ -52,7 +48,9 @@
                 <article th:each="product:${products}">
                   <ul>
                     <li>
-                      <a th:href="@{/product/view(productCode=${product.productCode})}" class="thumb"><img th:src="@{/thumb/{cate1}/{cate2}/{img}(cate1=${product.cate1}, cate2=${product.cate2}, img=${product.thumb1})}" alt="상품이미지"/></a>
+                      <a th:href="@{/product/view(productCode=${product.productCode})}" class="thumb">
+                      	<img th:src="@{/thumb/{cate1}/{cate2}/{img}(cate1=${product.cate1}, cate2=${product.cate2}, img=${product.thumb1})}" alt="상품이미지"/>
+                      </a>
                     </li>
                     <li>
                       <h3 class="name">[[${product.name}]]</h3>
@@ -69,7 +67,7 @@
                         <span>[[${product.discount}]]%</span>
                       </div>
                       <span th:if="${product.delivery == 0}" class="freeshipping">무료배송</span>
-                      <strong th:if="${product.delivery != 0}">배송비 [[${#numbers.formatInteger(product.delivery, 3, 'COMMA')}]]원</strong>
+                      <span th:if="${product.delivery != 0}">배송비 [[${#numbers.formatInteger(product.delivery, 3, 'COMMA')}]]원</span>
                     </li>
                     <li>
                       <h4 class="seller"><i class="fas fa-home"></i>&nbsp;[[${product.company}]]</h4>
@@ -87,25 +85,21 @@
               <!-- 상품목록 페이지번호 -->
               <div class="paging">
                 <span class="prev">
-                  <a href="#"><&nbsp;이전</a>
+                	<a th:if="${groups[0] > 1}" th:href="@{/product/list(cate1=${cateVo.cate1}, cate2=${cateVo.cate2}, pg=${groups[0]-1})}" class="prev">이전</a>
                 </span>
                 <span class="num">
-                  <a href="#" class="on">1</a>
-                  <a href="#">2</a>
-                  <a href="#">3</a>
-                  <a href="#">4</a>
-                  <a href="#">5</a>
-                  <a href="#">6</a>
-                  <a href="#">7</a>
+                  	<th:block th:each="num:${#numbers.sequence(groups[0], groups[1])}">
+                		<a th:href="@{/product/list(cate1=${cateVo.cate1}, cate2=${cateVo.cate2}, pg=${num})}" th:class="${num==currentPage?'on':''}">[[${num}]]</a>
+                	</th:block>
                 </span>
                 <span class="next">
-                  <a href="#">다음&nbsp;></a>
+					<a th:if="${groups[1] < lastPageNum}" th:href="@{/product/list(cate1=${cateVo.cate1}, cate2=${cateVo.cate2}, pg=${groups[1]+1})}" class="next">다음</a>
                 </span>
               </div>
 
             </section>
         </main>
-        <th:block th:include="@{/_footer.html}"></th:block>
+        <th:block th:include="@{_footer.html}"/>
         <button type="button" id="top">상단이동</button>
     </div>    
 </body>

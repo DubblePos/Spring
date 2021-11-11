@@ -29,7 +29,7 @@ public class MemberController {
 	}
 	
 	@GetMapping("/member/login")
-	public String login(int productCode, Model model) {
+	public String login(String productCode, Model model) {
 		model.addAttribute("productCode",productCode);
 		return "/member/login";
 	}
