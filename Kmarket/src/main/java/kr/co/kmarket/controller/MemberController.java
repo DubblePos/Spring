@@ -3,6 +3,8 @@ package kr.co.kmarket.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,26 +22,36 @@ import kr.co.kmarket.vo.MemberVo;
 @Controller
 public class MemberController {
 
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
+	
 	@Autowired
 	private MemberService service;
 	
 	@GetMapping("/member/join")
 	public String join() {
+		
+		logger.info("join");
 		return "/member/join";
 	}
 	
 	@GetMapping("/member/login")
-	public String login(String productCode, Model model) {
+	public String login(String productCode, String success, Model model) {
+		
+		logger.info("get-login...");
 		model.addAttribute("productCode",productCode);
+		model.addAttribute("success",success);
 		return "/member/login";
 	}
 	
 	@PostMapping("/member/login")
 	public String login(MemberVo vo, HttpSession sess) {
 		
+		logger.info("post-login...");
 		MemberVo memberVo = service.selectMember(vo);
 		
 		if(memberVo != null) {
+			logger.info("get-login1...");
+			
 			sess.setAttribute("sessMember", memberVo);	
 			
 			if(vo.getProductCode() > 0) {
@@ -48,24 +60,27 @@ public class MemberController {
 				return "redirect:/";	
 			}
 		}else {
+			logger.info("get-login2...");
 			return "redirect:/member/login?success=100";
 		}
 	}
 	
 	@GetMapping("/member/logout")
 	public String logout(HttpSession sess) {
+		logger.info("logout...");
 		sess.invalidate();
 		return "redirect:/";
 	}
 	
 	@GetMapping("/member/register")
 	public String register() {
+		logger.info("get-register...");
 		return "/member/register";
 	}
 	
 	@PostMapping("/member/register")
 	public String register(MemberVo vo, HttpServletRequest req) {
-		
+		logger.info("post-register...");
 		String ip = req.getRemoteAddr();
 		
 		vo.setIp(ip);

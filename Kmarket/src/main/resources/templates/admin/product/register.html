@@ -19,7 +19,7 @@
     		
     		
     		// 1차 카테고리 생성
-    		$.get('/admin/product/getCate1', function(data){
+    		$.get('/Kmarket/admin/product/getCate1', function(data){
     			/*
     			for(var i=0; i<data.length; i++){
     				select1.append("<option value='"+data[i].cate1+"'>"+data[i].title+"</option>");	
@@ -44,7 +44,7 @@
     			var cate1 = $(this).val();
     			var jsonData = {'cate1':cate1};
     			
-    			$.get('/admin/product/getCate2', jsonData, function(data){
+    			$.get('/Kmarket/admin/product/getCate2', jsonData, function(data){
     				
     				select2.empty();
     				select2.append("<option value='0'>2차 분류 선택</option>");
@@ -69,7 +69,7 @@
 </head>
 <body>
     <div id="admin-wrapper">
-        <th:block th:include="@{/admin/_header.html}"></th:block>
+        <th:block th:include="@{admin/_header.html}"></th:block>
         <main>
             <aside>
                 <!-- Global Navigation Bar -->
@@ -276,7 +276,7 @@
                 <!-- 상품등록 컨텐츠 끝 -->
             </section>
         </main>
-       <th:block th:include="@{/admin/_footer.html}"></th:block>
+       <th:block th:include="@{admin/_footer.html}"></th:block>
     </div>    
 </body>
 </html>

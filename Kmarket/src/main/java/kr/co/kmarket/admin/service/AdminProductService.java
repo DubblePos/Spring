@@ -7,6 +7,8 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.UUID;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -19,6 +21,8 @@ import kr.co.kmarket.vo.ProductVo;
 @Service
 public class AdminProductService {
 
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
+	
 	@Autowired
 	private AdminProductDao dao;
 	
@@ -61,20 +65,28 @@ public class AdminProductService {
 	    		String fullpath = path+"/"+vo.getCate1()+"/"+vo.getCate2()+"/";
 	    		
     		 try{
+    			 	logger.info("fileupload try1...");
+    			 
     			 	// 디렉터리 생성
     			 	Path root = Paths.get(fullpath);
     			 	Files.createDirectories(root);
     			 			
+    			 	logger.info("fileupload try2...");
+    			 	
     		    	// 첨부파일 저장
     			    mf.transferTo(new File(fullpath+uName));
+    			    logger.info("fileupload try3...");
     			    
     			    // 이미지 새이름으로 vo저장 
     			    if(i==0) vo.setThumb1(uName);
     			    if(i==1) vo.setThumb2(uName);
     			    if(i==2) vo.setThumb3(uName);
     			    if(i==3) vo.setDetail(uName);
+    			    logger.info("fileupload try4...");
+    			    
     		    }catch (Exception e) {
     				e.printStackTrace();
+    				logger.error("fileupload error... : "+e.getMessage());
     			}
 	    	    
 	    	} // if end
