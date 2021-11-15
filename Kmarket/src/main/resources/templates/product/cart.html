@@ -121,7 +121,7 @@
     			
     			// 삭제 요청하기
     			$.ajax({
-    				url: '/product/cartDelete',
+    				url: '/Kmarket/product/cartDelete',
     				type: 'get',
     				traditional: true, /* 배열값 전송을 위한 옵션 */
     				data: jsonData,
@@ -196,7 +196,7 @@
     			console.log(JSON.stringify(jsonData));
     			
     			$.ajax({
-    				url: '/product/order',
+    				url: '/Kmarket/product/order',
     				type: 'post',
     				traditional: true, 
     				data: jsonData,
@@ -205,7 +205,7 @@
     					//alert(data.orderId);
     					// 주문 페이지로 이동
     					var orderId = data.orderId;
-    					location.href='/product/order?orderId='+orderId;
+    					location.href='/Kmarket/product/order?orderId='+orderId;
     				}
     			});
     			

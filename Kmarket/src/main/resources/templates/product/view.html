@@ -60,7 +60,7 @@
 				if(uid == null){
 					var result = confirm('로그인을 하셔야 합니다.');
 					if(result){
-						location.href = '/member/login?productCode='+productCode;	
+						location.href = '/Kmarket/member/login?productCode='+productCode;	
 					}
 					
 				}else{
@@ -76,7 +76,7 @@
 							'total':total,
 					};
 					
-					$.post('/product/cart', jsonData, function (data) {
+					$.post('/Kmarket/product/cart', jsonData, function (data) {
 						
 						if(data.result == 1){
 							alert('이미 장바구니에 상품이 있습니다.');
@@ -84,7 +84,7 @@
 							var result = confirm('장바구니에 상품을 담았습니다.\n 장바구니 페이지로 이동하시겠습니까?');
 							if(result){
 									
-								location.href = '/product/cart';
+								location.href = '/Kmarket/product/cart';
 							}
 						}
 					}, "json");
@@ -104,7 +104,7 @@
 </head>
 <body>
     <div id="wrapper">
-       <th:block th:include="@{/_header.html}"></th:block>
+       <th:block th:include="@{_header.html}"></th:block>
         <main>
             <!-- 카테고리/베스트 상품 영역 -->
             <aside>
@@ -371,7 +371,7 @@
                 </section>
             </section>
         </main>
-        <th:block th:include="@{/_footer.html}"></th:block>
+        <th:block th:include="@{_footer.html}"></th:block>
         <button type="button" id="top">상단이동</button>
     </div>    
 </body>
