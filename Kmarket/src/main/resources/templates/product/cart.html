@@ -11,204 +11,207 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
     <link rel="stylesheet" th:href="@{/css/style.css}">    
-<script>
-	//장바구니 전체 집계
-	function aggregation(){
-		var cartProduct = $('input[name=checkProduct]:checked').parent().parent();// 첫번째 parent:td, 두번째 parent:tr && 클래스는 . 붙이고 cartProduct
-	
-	
-		// 상품 수 집계
-		var countTds = cartProduct.find('.count');
-		var totCount = 0;
-		
-		$.each(countTds, function() {
-			var count = parseInt($(this).text());
-			totCount += count;
-		});
-		
-		$('.info .count').text(totCount+'개');
-		
-		// 판매가 집계
-		var priceTds = cartProduct.find('.price');
-		var totPrice = 0;
-		
-		$.each(priceTds, function() {
-			var price = parseInt($(this).text().replace(/,/g,''));
-			totPrice += price;
-			
-		});
-		
-		$('.info .price').text(totPrice.toLocaleString()+'원');
-		
-		// 할인금액 집계
-		var discountTds = cartProduct.find('.discount');
-		var totDiscount = 0;
-		
-		$.each(discountTds, function() {
-		
-			var price	 = parseInt($(this).prev().text().replace(/,/g, '')); //parseInt:숫자로가져옴
-			var discount = parseInt($(this).text().replace(/,/g, ''));
-			
-			totDiscount += (price * discount / 100);
-			
-			
-		});
-		
-		$('.info .discount').text(totDiscount.toLocaleString()+'원');
-		
-		
-		// 배송비 집계
-		
-		var deliveryTds = cartProduct.find('.delivery');
-		var totDelivery = 0;
-		
-		$.each(deliveryTds, function() {
-			var delivery = $(this).text().replace(/,/g,'');
-			
-			if(delivery != '무료배송'){
-				totDelivery += parseInt(delivery);
-			}
-		});
-		
-		$('.info .delivery').text(totDelivery.toLocaleString()+'원');
-		
-		// 포인트 집계
-		
-		var pointTds = cartProduct.find('.point');
-		var totPoint = 0;
-		
-		$.each(pointTds, function() {
-			var point = parseInt($(this).text().replace(/,/g,''));
-			totPoint += point;
-			
-		});
-		
-		$('.info .point').text(totPoint.toLocaleString());
-		
-		
-		// 전체주문금액 집계
-		
-		var totalTds = cartProduct.find('.total');
-		var totTotal= 0;
-		
-		$.each(totalTds, function() {
-			var total = parseInt($(this).text().replace(/,/g,''));
-			totTotal += total;
-			
-		});
-		
-		$('.info .total').text(totTotal.toLocaleString()+'원');
-	} // aggregaion end
-	
-	
-	$(function() {
-		
-		// 최초 전체 장바구니 상품 집계
-		aggregation();
-		
-		// 삭제버튼
-		$('input[name=del]').click(function() {
-			
-			var checkedProduct = $('input[name=checkProduct]:checked');
-		
-			if(checkedProduct.length == 0){
-				alert('삭제하고자 하는 상품을 선택하세요.');
-				return;
-			}
-			
-			// 자바스크립트 배열
-			var cartIds = [];
-			
-			$.each(checkedProduct, function() {
-				var cartId = $(this).val();
-				cartIds.push(cartId); /*파이썬에서는 append 자바스크립트에서는 push*/
-			});
-			
-			var jsonData = {'cartIds': cartIds};
-			
-			// 삭제 요청하기
-			$.ajax({
-				url:'/product/cartDelete',
-				type:'get',
-				traditional:true, /* 배열값 전송을 위한 옵션*/
-				data:jsonData,
-				dataType:'json',
-				success:function(data){
-					//alert(data.result);
-					location.href='/product/cart';
-				}
-			});
-			
-		});
-		
-		// 전체 체크박스 체크/해지
-		$('input[name=all]').change(function() { /*is : 상태*/
-			if($(this).is(':checked')){ /*현재 체크되었다면*/
-				// 전체 상품 체크박스 체크
-				$('input[name=checkProduct]').prop('checked', true); /*prop:프로퍼티 속성함수, 제이쿼리 체크박스 함수 검색 ㄱㄱ싱*/
-				
-			}else{
-				// 전체 상품 체크박스 해지
-				$('input[name=checkProduct]').prop('checked', false);
-			}
-		
-			// 집계 재조정
-			aggregation();
-		
-		});		
-		
-		// 개별 체크박스 체크/해제
-		$('input[name=checkProduct]').change(function(){
-			
-			// 집계 재조정
-			aggregation();
-		});
-		
-		// 주문하기
-		$('input[name=order]').click(function(){
+    <script>
+    	////////////////////////////////////////////////////////
+    	// 장바구니 전체 집계함수
+    	function aggregation(){
+    		
+			var cartProduct = $('input[name=checkProduct]:checked').parent().parent();
+    		
+    		// 상품 수 집계
+    		var countTds = cartProduct.find('.count');
+    		var totCount = 0;
+    		
+    		$.each(countTds, function(){
+    			var count = parseInt($(this).text());
+    			totCount += count;
+    		});
+    		
+    		$('.info .count').text(totCount+'개');    		    		
+    		
+    		// 판매가 집계
+    		var priceTds = cartProduct.find('.price');
+    		var totPrice = 0;
+    		
+    		$.each(priceTds, function(){
+    			var price = parseInt($(this).text().replace(/,/g, ''));
+    			totPrice += price;
+    		});
+    		
+    		$('.info .price').text(totPrice.toLocaleString()+'원');
+    		
+    		// 할인금액 집계
+    		var discountTds = cartProduct.find('.discount');
+    		var totDiscount = 0;
+    		
+    		$.each(discountTds, function(){
     			
-				var checkedProduct = $('input[name=checkProduct]:checked');
-    			var productCodes = [];
+    			var price =  parseInt($(this).prev().text().replace(/,/g, ''));
+    			var discount = parseInt($(this).text().replace(/,/g, ''));
+    			
+    			totDiscount += (price * discount / 100);
+    		});
+    		
+    		totDiscount = Math.round(totDiscount);
+    		
+    		$('.info .discount').text(totDiscount.toLocaleString()+'원');
+    		
+    		// 배송비 집계
+    		var deliveryTds = cartProduct.find('.delivery');
+    		var totDelivery = 0;
+    		
+    		$.each(deliveryTds, function(){
+    			var delivery = $(this).text().replace(/,/g, '');
+    			
+    			if(delivery != '무료배송'){
+    				totDelivery += parseInt(delivery);
+    			}
+    		});
+    		
+    		$('.info .delivery').text(totDelivery.toLocaleString()+'원');
+    		
+    		// 포인트 집계
+    		var pointTds = cartProduct.find('.point');
+    		var totPoint = 0;
+    		
+    		$.each(pointTds, function(){
+    			var point = parseInt($(this).text().replace(/,/g, ''));
+    			totPoint += point;
+    		});
+    		
+    		$('.info .point').text(totPoint.toLocaleString()+'원');
+    		
+    		// 전체 주문금액 집계
+    		var totalTds = cartProduct.find('.total');
+    		var totTotal = 0;
+    		
+    		$.each(totalTds, function(){
+    			var total = parseInt($(this).text().replace(/,/g, ''));
+    			totTotal += total;
+    		});
+    		
+    		$('.info .total').text(totTotal.toLocaleString()+'원');
+    		
+    	}// aggregation end
+    	
+    	
+    	$(function(){
+    		
+    		// 최초 전체 장바구니 상품 집계
+    		aggregation();
+    		
+    		// 삭제버튼
+    		$('input[name=del]').click(function(){
+    			
+    			var checkedProduct = $('input[name=checkProduct]:checked');
+    			
+    			if(checkedProduct.length == 0){
+    				alert('삭제하고자 하는 상품을 선택하세요.');
+    				return;
+    			}
+    			
+    			var cartIds = [];
     			
     			$.each(checkedProduct, function(){
-    				var productCode = $(this).data('product-code'); //접두어는 제외 'product-code' 사용자마음대로 코드
-    				productCodes.push(productCode);	
+    				var cartId = $(this).val();
+    				cartIds.push(cartId);	
     			});
-
-    			var uid 	 = $('.info input[name=uid]').val();
-    			var count	 = $('.info .count').text().replace(/(,|개)/g,'');
-   				var price 	 = $('.info .price').text().replace(/(,|원)/g,'');
-    			var discount = $('.info .discount').text().replace(/(,|원)/g,'');
-    			var delivery = $('.info .delivery').text().replace(/(,|원)/g,'');
-    			var point 	 = $('.info .point').text().replace(/(,|원)/g,'');
-    			var total 	 = $('.info .total').text().replace(/(,|원)/g,'');
+    			    			
+    			var jsonData = {'cartIds': cartIds};
+    			
+    			// 삭제 요청하기
+    			$.ajax({
+    				url: '/product/cartDelete',
+    				type: 'get',
+    				traditional: true, /* 배열값 전송을 위한 옵션 */
+    				data: jsonData,
+    				dataType: 'json',
+    				success: function(data){
+    					// 다시 장바구니 페이지 요청
+    					location.href='/product/cart';
+    				}
+    			});
+    		});
+    		
+    		// 전체 체크박스 체크/해지
+    		$('input[name=all]').change(function(){
+    			
+    			if($(this).is(':checked')){
+    				// 전체 상품 체크박스 체크
+    				$('input[name=checkProduct]').prop('checked', true);
+    			}else{
+    				// 전체 상품 체크박스 해지
+    				$('input[name=checkProduct]').prop('checked', false);
+    			}
+    			
+    			// 집계 재조정
+    			aggregation();
+    		});
+    		
+    		// 개별 체크박스 체크/해제
+    		$('input[name=checkProduct]').change(function(){
+    			// 집계 재조정
+    			aggregation();   			
+    		});
+    		
+    		// 주문하기
+    		$('input[name=order]').click(function(){
+    			
+				var checkedProduct = $('input[name=checkProduct]:checked');
+				var cartIds = [];
+    			var productCodes  = [];
+    			var productCounts = [];
+    			
+    			$.each(checkedProduct, function(){
+    				var cartId = $(this).val();
+    				var productCode  = $(this).data('product-code');
+    				var productCount = $(this).data('product-count');
+    				
+    				cartIds.push(cartId);
+    				productCodes.push(productCode);
+    				productCounts.push(productCount);
+    			});
+    			
+    			var uid      = $('.info input[name=uid]').val();
+    			var count    = $('.info .count').text().replace(/(,|개)/g, '');
+    			var price    = $('.info .price').text().replace(/(,|원)/g, '');
+    			var discount = $('.info .discount').text().replace(/(,|원)/g, '');
+    			var delivery = $('.info .delivery').text().replace(/(,|원)/g, '');
+    			var point    = $('.info .point').text().replace(/(,|원)/g, '');
+    			var total    = $('.info .total').text().replace(/(,|원)/g, '');
     			
     			var jsonData = {
-    					'uid': uid,
-    					'count': count,
-    					'price': price,
-    					'discount': discount,
-    					'delivery': delivery,
-    					'point': point,
-    					'total': total,
-    					'productCodes': productCodes
-    					};
+    				'uid': uid,
+    				'count': count,
+    				'price': price,
+    				'discount': discount,
+    				'delivery': delivery,
+    				'point': point,
+    				'total': total,
+    				'productCodes': productCodes,
+    				'productCounts': productCounts,
+    				'cartIds': cartIds
+    				};
+    			
+    			console.log(JSON.stringify(jsonData));
     			
     			$.ajax({
-    				url:'/product/order',
-    				type:'post',
-    				traditional: true,
+    				url: '/product/order',
+    				type: 'post',
+    				traditional: true, 
     				data: jsonData,
     				dataType:'json',
     				success: function(data){
-    					alert(data.result);
+    					//alert(data.orderId);
+    					// 주문 페이지로 이동
+    					var orderId = data.orderId;
+    					location.href='/product/order?orderId='+orderId;
     				}
     			});
-		
-		});	
-	});
-	
-</script>      
+    			
+    		});
+    	});
+    </script>
 </head>
 <body>
     <div id="wrapper">
@@ -239,6 +242,7 @@
                         <th>상품명</th>
                         <th>총수량</th>
                         <th>판매가</th>
+                        <th>할인</th>
                         <th>포인트</th>
                         <th>배송비</th>
                         <th>소계</th>
@@ -250,8 +254,13 @@
                       </tr>
                       <tr th:each="product:${cartProducts}" class="cartProduct">
                         <td>
-                        	<input type="checkbox" name="checkProduct" th:value="${product.cartId}" th:data-product-code="${product.productCode}" checked>
-                       	</td>
+                        	<input type="checkbox" 
+                        		   name="checkProduct" 
+                        		   th:value="${product.cartId}" 
+                        		   th:data-product-code="${product.productCode}"
+                        		   th:data-product-count="${product.count}"
+                        		   checked/>
+                        </td>
                         <td>
                           <article>
                             <a href="#">
@@ -280,7 +289,7 @@
               <div class="info">
                 <h2>전체합계</h2>
                 <table border="0">
-               	  <input type="hidden" name="uid" th:value="${session.sessMember.uid}"/>
+                  <input type="hidden" name="uid" th:value="${session.sessMember.uid}"/>
                   <tr>
                     <td>상품수</td>
                     <td class="count">-</td>

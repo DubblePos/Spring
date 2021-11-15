@@ -1,12 +1,19 @@
 package kr.co.kmarket.vo;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
+@Entity
+@Table(name="km_member")
 public class MemberVo {
-
+	@Id
 	public String uid;
 	public String pass;
 	public String name;
@@ -37,5 +44,6 @@ public class MemberVo {
 	public String etc5;
 	
 	// 추가필드
+	@Transient
 	private int productCode;
 }
