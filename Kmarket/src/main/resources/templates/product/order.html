@@ -36,7 +36,7 @@
     			};
     			
     			$.ajax({
-    				url:'/product/order-complete',
+    				url:'/Kmarket/product/order-complete',
     				type:'post',
     				data: jsonData,
     				dataType:'json',
@@ -44,7 +44,7 @@
     					
     					alert(data.result);
     					
-    					location.replace('/product/order-complete');
+    					location.replace('/Kmarket/product/order-complete');
     					
     				}
     			});
@@ -55,7 +55,7 @@
 </head>
 <body>
     <div id="wrapper">
-        <th:block th:include="@{/_header.html}"></th:block>
+        <th:block th:include="@{_header.html}"></th:block>
         <main>
             <!-- 카테고리/베스트 상품 영역 -->
             <aside>
@@ -239,7 +239,7 @@
               </section>
             </section>
         </main>
-        <th:block th:include="@{/_footer.html}"></th:block>
+        <th:block th:include="@{_footer.html}"></th:block>
         <button type="button" id="top">상단이동</button>
     </div>    
 </body>
