@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -112,152 +112,21 @@
                 </section>
                 <section class="rank">
                     <h1 style="color:white; font-size: 70px;">박스 오피스</h1>
-                    <article>
+                    <article th:each="movies : ${movieinfo}">
                         <a>
                             <div class="rank-movie-image">
-                                <img src="./img/movie_image01.jpg" alt="rank1"/>
+                                <img th:src="@{/img/강릉.png}" alt="rank1"/>
                             </div>
-                            <h2 style="color:white;font-size:30px;">이터널스</h2>
+                            <h2 style="color:white;font-size:30px;">[[${movies.title}]]</h2>
                             <p style="color:white;font-size:25px;">장르</p>
                             <p style="color:white;font-size:25px;">감독</p>
                             <p style="color:white;font-size:25px;">배우</p>
                             <h1 class="rating star5" style="color:white;font-size:20px;">관람평</h1>
                         </a>
                     </article>
-                    
-                    <article>
-                        <a>
-                            <div class="rank-movie-image">
-                                <img src="./img/movie_image02.jpg" alt="rank2"/>
-                            </div>
-                            <h2 style="color:white;font-size:30px;">강릉</h2>
-                            <p style="color:white;font-size:25px;">장르</p>
-                            <p style="color:white;font-size:25px;">감독</p>
-                            <p style="color:white;font-size:25px;">배우</p>
-                            <h1 class="rating star5" style="color:white;font-size:20px;">관람평</h1>
-                        </a>
-                    </article>
-
-                    
-                    <article>
-                        <a>
-                            <div class="rank-movie-image">
-                                <img src="./img/movie_image03.jpg" alt="rank3"/>
-                            </div>
-                            <h2 style="color:white;font-size:30px;">듄</h2>
-                            <p style="color:white;font-size:25px;">장르</p>
-                            <p style="color:white;font-size:25px;">감독</p>
-                            <p style="color:white;font-size:25px;">배우</p>
-                            <h1 class="rating star5" style="color:white;font-size:20px;">관람평</h1>
-                        </a>
-                    </article>
-
-                    
-                    <article>
-                        <a>
-                            <div class="rank-movie-image">
-                                <img src="./img/movie_image04.jpg" alt="rank4"/>
-                            </div>
-                            <h2 style="color:white;font-size:30px;">아담스패밀리2</h2>
-
-                            <p style="color:white;font-size:30px;">장르</p>
-                            <p style="color:white;font-size:25px;">감독</p>
-                            <p style="color:white;font-size:25px;">배우</p>
-                            <h1 class="rating star5" style="color:white;font-size:20px;">관람평</h1>
-                        </a>
-                    </article>
-
-                    
-                    <article>
-                        <a>
-                            <div class="rank-movie-image">
-                                <img src="./img/movie_image05.jpg" alt="rank5"/>
-                            </div>
-                            <h2 style="color:white;font-size:30px;">살아남은 사람들</h2>
-                            <p style="color:white;font-size:30px;">장르</p>
-                            <p style="color:white;font-size:25px;">감독</p>
-                            <p style="color:white;font-size:25px;">배우</p>
-                            <h1 class="rating star5" style="color:white;font-size:20px;">관람평</h1>
-                        </a>
-                    </article>
-
-                    
-                    <article>
-                        <a>
-                            <div class="rank-movie-image">
-                                <img src="./img/movie_image06.jpg" alt="rank6"/>
-                            </div>
-                            <h2 style="color:white;font-size:30px;">귀멸의 칼날</h2>
-                            <p style="color:white;font-size:25px;">장르</p>
-                            <p style="color:white;font-size:25px;">감독</p>
-                            <p style="color:white;font-size:25px;">배우</p>
-                            <h1 class="rating star5" style="color:white;font-size:20px;">관람평</h1>
-                        </a>
-                    </article>
-
-                    
-                    <article>
-                        <a>
-                            <div class="rank-movie-image">
-                                <img src="./img/movie_image07.jpg" alt="rank7"/>
-                            </div>
-                            <h2 style="color:white;font-size:30px;">퍼스트 카우</h2>
-                            <p style="color:white;font-size:25px;">장르</p>
-                            <p style="color:white;font-size:25px;">감독</p>
-                            <p style="color:white;font-size:25px;">배우</p>
-                            <h1 class="rating star5" style="color:white;font-size:20px;">관람평</h1>
-                        </a>
-                    </article>
-                    
-                    <article>
-                        <a>
-                            <div class="rank-movie-image">
-                                <img src="./img/movie_image08.jpg" alt="rank8"/>
-                            </div>
-                            <h2 style="color:white;font-size:30px;">부담페스트 스토리</h2>
-                            <p style="color:white;font-size:30px;">장르</p>
-                            <p style="color:white;font-size:25px;">감독</p>
-                            <p style="color:white;font-size:25px;">배우</p>
-                            <h1 class="rating star5" style="color:white;font-size:20px;">관람평</h1>
-                        </a>
-                    </article>
-
-                    
-                    <article>
-                        <a>
-                            <div class="rank-movie-image">
-                                <img src="./img/movie_image09.jpg" alt="rank9"/>
-                            </div>
-                            <h2 style="color:white;font-size:30px;">아네트</h2>
-                            <p style="color:white;font-size:30px;">장르</p>
-                            <p style="color:white;font-size:25px;">감독</p>
-                            <p style="color:white;font-size:25px;">배우</p>
-                            <h1 class="rating star5" style="color:white;font-size:20px;">관람평</h1>
-                        </a>
-                    </article>
-
-                   
-                    <article>
-                        <a>
-                            <div class="rank-movie-image">
-                                <img src="./img/movie_image10.jpg" alt="rank10"/>
-                            </div>
-                            <h2 style="color:white;font-size:30px;">미션임파서블루벤</h2>
-                            <p style="color:white;font-size:30px;">장르</p>
-                            <p style="color:white;font-size:25px;">감독</p>
-                            <p style="color:white;font-size:25px;">배우</p>
-                            <h1 class="rating star5" style="color:white;font-size:20px">관람평</h1>
-                        </a>
-                    </article>
-
                 </section>
-    
             </section>
-
-
         </main>
-        
     </div>
-    
 </body>
 </html>
