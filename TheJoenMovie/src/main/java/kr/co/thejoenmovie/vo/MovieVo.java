@@ -6,11 +6,11 @@ import lombok.Data;
 public class MovieVo {
 
 	public String title;
-	public int score;
+	public float score;
 	public String genre;
 	public String director;
 	public String actor;
-	public int rtime;
-	public int rdate;
+	public String rtime;
+	public String rdate;
 	public String poster;
 }

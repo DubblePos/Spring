@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TheJoen Movie</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://kit.fontawesome.com/20962f3e4b.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+    <link rel="stylesheet" href="./css/header.css"/>
+    <link rel="stylesheet" href="./css/main.css"/>
+    <link rel="stylesheet" href="./css/seat.css"/>
+    <style>
+        /* 인원 선택 영역*/
+        .number-select > .adult{
+            width: 140px;
+            margin:0 auto;
+            color: white;
+            font-size: 40px;
+        }
+        .number-select > .count {
+            width: 180px;
+            height: 70px;
+            margin: 0 auto;
+        }
+        .number-select > .count > button{
+            width: 50px;
+            height: 50px;
+            font-size: 40px;
+            margin: 0 auto;
+        }
+        .number-select > .count > #adult-number{
+            color: white;
+            padding: 0 20px;
+            font-size: 40px;
+        }
+        button#adult-minus:hover{
+            background-color: rgb(204, 248, 10);
+        }
+        button#adult-minus:active{
+            box-shadow: inset -2px -2px 3px rgba(255, 255, 255, .6),
+                        inset 2px 2px 3px rgba(0, 0, 0, .6);
+        }
+        button#adult-plus:hover{
+            background-color: rgb(204, 248, 10);
+        }
+        button#adult-plus:active{
+            box-shadow: inset -2px -2px 3px rgba(255, 255, 255, .6),
+                        inset 2px 2px 3px rgba(0, 0, 0, .6);
+        }
+        /* 스크린 영역 */
+        .screen-area{
+            width: 100%;
+            height: 50px;
+            
+            margin: 0 auto;
+        }
+        .screen-area > #screen-text{
+            width: 150px;
+            margin: 0 auto;
+            color: white;
+            font-size: 40px;
+        }
+    </style>
+</head>
+<body>
+    <div class="body-wrap">
+        <header id="header">
+            <h1 class="ci">
+    
+                <a href="/" title="더조은무비 메인으로가기">
+                    <img src="./img/logo-image.png">
+                </a>
+            </h1>
+            <nav id="gnb">
+                <div class="main-menu">
+                    <ul class="menu-depth1">
+                        <li>
+                            <a href="./view_total_movie.html">
+                                <img src="./img/movie_menu01.png">
+                                <h1 style="color:#120303;font-size:40px;">영화</h1>
+                            </a>
+                            
+                        </li>
+                        <li>
+                            <a href="./book_ticket.html">
+                                <img src="./img/ticket_menu01.png">
+                                <h1 style="color:#120303;font-size:40px">예매</h1>
+                            </a>
+
+                            <ul id="ticket-depth2">
+                                <li><a href="./book_ticket.html" style="color: white; font-size: 25px;">빠른 예매</a></li>
+                                <li><a href="./view_timeline.html" style="color: white; font-size: 25px;">상영 시간</a></li>
+                            </ul>
+                        
+                        </li>
+                        <li>
+                            
+                            <a href="./view_event.html">
+                                <img src="./img/event_menu02.png" style="margin-left:20px;">
+                                <h1 style="color:#120303;font-size:40px">이벤트</h1>
+                            </a>
+                        </li>
+                        <li>
+                            
+                            <a href="./member/login.html">
+                                <img src="./img/login-image.png" style="margin-left:10px;">
+                                <h1 style="color:#120303;font-size:40px">멤버쉽</h1>
+                            </a>
+                            <ul id="login-depth2">
+                                <li><a href="./member/terms.html" style="color: white; font-size: 25px;">회원가입</a></li>
+                                <li><a href="./member/login.html" style="color: white; font-size: 25px;">로그인</a></li>
+                            </ul>
+                        </li>
+                    </ul>              
+                </div>
+            </nav>
+        </header>
+        <div class="container">
+            <div class="seat">
+                <div class="navi">
+                    <h1 id="speed-ticket" style="color:white;">좌석 선택</h1>
+                </div>
+                <!-- 사람수와 좌석수를 맞추기 위해 먼저 사람수를 선택한다. -->
+                <div class="number-select">
+                    <h1 class="adult">성인</h1>
+                    <div class="count">
+                        <button id="adult-minus">-</button>
+                        <span id="adult-number">0</span>
+                        <button id="adult-plus">+</button>
+                    </div>
+                </div>
+                <style>
+                    
+
+
+                </style>
+                <div class="screen-area">
+
+                    <h1 id="screen-text"> 스 크 린</h1>
+                </div>
+                <style>
+                    .seat-list {
+                        width: 1000px;
+                        height: 300px;
+                        
+                    }
+                    .seat-list > .seats > button{
+                        width: 100px; 
+                        height: 100px;
+                        font-size: 20px;
+                        margin: 22px 22px;
+                    }
+                    .seat-list > .seats > button:hover {
+                        background-color: rgb(164, 238, 27);
+                    }
+
+                    .seat-list > .seats > button:active {
+                        box-shadow: inset -2px -2px 3px rgba(255, 255, 255, .6),
+                                    inset 2px 2px 3px rgba(0, 0, 0, .6);
+                    }
+
+                </style>
+                <div class="seat-list">
+                    <!-- 이부분도 제이쿼리로 처리할 예정-->
+                    <div class="seats A-seat-area">
+                        <button type="button" class="A"> A01 </button>
+                        <button type="button" class="A"> A02 </button>
+                        <button type="button" class="A"> A03 </button>
+                        <button type="button" class="A"> A04 </button>
+                        <button type="button" class="A"> A05 </button>
+                        <button type="button" class="A"> A06 </button>
+                        <button type="button" class="A"> A07 </button>
+                        <button type="button" class="A"> A08 </button>
+                        <button type="button" class="A"> A09 </button>       
+                        <button type="button" class="A"> A10 </button>       
+                    </div>
+                    <div class="seats B-seat-area">
+                        <button type="button" class="B"> B01 </button>
+                        <button type="button" class="B"> B02 </button>
+                        <button type="button" class="B"> B03 </button>
+                        <button type="button" class="B"> B04 </button>
+                        <button type="button" class="B"> B05 </button>
+                        <button type="button" class="B"> B06 </button>
+                        <button type="button" class="B"> B07 </button>
+                        <button type="button" class="B"> B08 </button>
+                        <button type="button" class="B"> B09 </button>       
+                        <button type="button" class="B"> B10 </button>       
+                    </div>
+                    <div class="seats C-seat-area">
+                        <button type="button" class="C"> C01 </button>
+                        <button type="button" class="C"> C02 </button>
+                        <button type="button" class="C"> C03 </button>
+                        <button type="button" class="C"> C04 </button>
+                        <button type="button" class="C"> C05 </button>
+                        <button type="button" class="C"> C06 </button>
+                        <button type="button" class="C"> C07 </button>
+                        <button type="button" class="C"> C08 </button>
+                        <button type="button" class="C"> C09 </button>       
+                        <button type="button" class="C"> C10 </button>       
+                    </div>
+                    <div class="seats D-seat-area">
+                        <button type="button" class="D"> D01 </button>
+                        <button type="button" class="D"> D02 </button>
+                        <button type="button" class="D"> D03 </button>
+                        <button type="button" class="D"> D04 </button>
+                        <button type="button" class="D"> D05 </button>
+                        <button type="button" class="D"> D06 </button>
+                        <button type="button" class="D"> D07 </button>
+                        <button type="button" class="D"> D08 </button>
+                        <button type="button" class="D"> D09 </button>       
+                        <button type="button" class="D"> D10 </button>       
+                    </div>
+                    <div class="seats E-seat-area">
+                        <button type="button" class="E"> E01 </button>
+                        <button type="button" class="E"> E02 </button>
+                        <button type="button" class="E"> E03 </button>
+                        <button type="button" class="E"> E04 </button>
+                        <button type="button" class="E"> E05 </button>
+                        <button type="button" class="E"> E06 </button>
+                        <button type="button" class="E"> E07 </button>
+                        <button type="button" class="E"> E08 </button>
+                        <button type="button" class="E"> E09 </button>       
+                        <button type="button" class="E"> E10 </button>       
+                    </div>
+                    <div class="seats F-seat-area">
+                        <button type="button" class="F"> F01 </button>
+                        <button type="button" class="F"> F02 </button>
+                        <button type="button" class="F"> F03 </button>
+                        <button type="button" class="F"> F04 </button>
+                        <button type="button" class="F"> F05 </button>
+                        <button type="button" class="F"> F06 </button>
+                        <button type="button" class="F"> F07 </button>
+                        <button type="button" class="F"> F08 </button>
+                        <button type="button" class="F"> F09 </button>       
+                        <button type="button" class="F"> F10 </button>       
+                    </div>
+                    <div class="seats G-seat-area">
+                        <button type="button" class="G"> G01 </button>
+                        <button type="button" class="G"> G02 </button>
+                        <button type="button" class="G"> G03 </button>
+                        <button type="button" class="G"> G04 </button>
+                        <button type="button" class="G"> G05 </button>
+                        <button type="button" class="G"> G06 </button>
+                        <button type="button" class="G"> G07 </button>
+                        <button type="button" class="G"> G08 </button>
+                        <button type="button" class="G"> G09 </button>       
+                        <button type="button" class="G"> G10 </button>       
+                    </div>
+                    <div class="seats H-seat-area">
+                        <button type="button" class="H"> H01 </button>
+                        <button type="button" class="H"> H02 </button>
+                        <button type="button" class="H"> H03 </button>
+                        <button type="button" class="H"> H04 </button>
+                        <button type="button" class="H"> H05 </button>
+                        <button type="button" class="H"> H06 </button>
+                        <button type="button" class="H"> H07 </button>
+                        <button type="button" class="H"> H08 </button>
+                        <button type="button" class="H"> H09 </button>       
+                        <button type="button" class="H"> H10 </button>       
+                    </div>
+                    <div class="seats I-seat-area">
+                        <button type="button" class="I"> I01 </button>
+                        <button type="button" class="I"> I02 </button>
+                        <button type="button" class="I"> I03 </button>
+                        <button type="button" class="I"> I04 </button>
+                        <button type="button" class="I"> I05 </button>
+                        <button type="button" class="I"> I06 </button>
+                        <button type="button" class="I"> I07 </button>
+                        <button type="button" class="I"> I08 </button>
+                        <button type="button" class="I"> I09 </button>       
+                        <button type="button" class="I"> I10 </button>       
+                    </div>
+
+
+                </div>
+                
+                <div class="final-selected">
+                    <div id="movie-selected">
+                        <h1>이터널스 > </h1>
+                    </div>
+                    <div id="area-selected">
+                        <h1>서울 ></h1>
+                    </div>
+                    <div id="theater-selected">
+                        <h1>강남 > </h1>
+                    </div>
+                    <div id="date-selected">
+                        <h1>2021 / 11 / 21  > </h1>
+                    </div>
+                    <div id="time-selected">
+                        <h1> 09:25  이터널스</h1>
+                    </div>
+                </div>
+                <style>
+                    .plus-selected{
+                        width: 200px;
+                        height: 100px;
+                        
+                        margin: 0 auto;
+                    }
+                    .plus-selected > h1{
+                        font-size: 30px;
+                        color: white;
+                    }
+                    .plus-selected > .seat-num{
+                        display: inline-block;
+                        width: auto;
+                        height: auto;
+                        margin: 0 auto;
+                        font-size: 30px;
+                        color: white;
+                        padding: 3px 10px;
+                        
+                    }
+                </style>
+                <div class="plus-selected">
+                    <h1>선택된 자석</h1>
+                    <span class="seat-num seat1">C05</span>
+                    <span class="seat-num eat2">E02</span>
+                </div>
+                <div class="seat-area">
+                    <button type="button" class="go-seat"> 결제하기 </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>

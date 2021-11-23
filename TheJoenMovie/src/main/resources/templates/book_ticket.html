@@ -15,18 +15,7 @@
     <link rel="stylesheet" th:href="@{/css/style.css}"/>
     <link rel="stylesheet" href="./css/header.css"/>
     <link rel="stylesheet" href="./css/main.css"/>
-
-    <script>
-        $(document).ready(function(){
-          $('.slider > ul').bxSlider({
-              pager: false,
-              easing: 'linear',
-              auto: true, // 슬라이더 자동여부 
-
-              autoHover: true // 마우스를 위에 올렸을 경우 애니메이션 정지 
-          });
-        });
-    </script>
+    <link rel="stylesheet" href="./css/ticket.css"/>
 
 </head>
 <body>
@@ -81,8 +70,325 @@
                     </ul>              
                 </div>
             </nav>
-            
         </header>
+        <div class="container">
+            <div class="ticket">
+                <div class="navi">
+                    <h1 id="speed-ticket" style="color:white;">빠른 예매</h1>
+                </div>
+                <style>
+                    
+                </style>
+                <div class="date-select">
+                    <div class="date-list">
+                        <div class="year-area" style="color:white">2021.11</div>
+                        <div class="date-area">
+                            <button type="button" id="before" > < </button>
+                            <button type="button" class="week mon"> 22 월 </button>
+                            <button type="button" class="week ue"> 23 화 </button>
+                            <button type="button" class="week wen"> 24 수 </button>
+                            <button type="button" class="week thu"> 25 목 </button>
+                            <button type="button" class="week fri"> 26 금 </button>
+                            <button type="button" class="week sat"> 27 토 </button>
+                            <button type="button" class="week sun"> 28 일 </button>
+                            <button type="button" class="week mon"> 29 월 </button>
+                            <button type="button" class="week tue"> 30 화 </button>  
+                            <button type="button" id="after">  >  </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="steps">
+                    <div class="step step1">
+                        <div class="section section-movie">
+                            <div class="col-head">
+                                <h3 class="movie-tab">영화</h3>
+                            </div>
+                            
+                            <div class="col-body">
+                                <div class="movie-select">
+                                    <div class="movie-list">
+                                        <ul>
+                                            <li>
+                                                
+                                                <a href="#">
+                                                    <span class="icon" style="background-position: 5px -29px;"></span>
+                                                    <span class="text">이터널스</span>
+                                                </a>
+                                            
+                                            </li>
+
+                                            <li>
+                                                
+                                                <a href="#">
+                                                    <span class="icon" style="background-position: 5px -29px;"></span>
+                                                    <span class="text">듄</span>
+                                                </a>
+                                            
+                                            </li>
+
+                                            <li>
+                                                
+                                                <a href="#">
+                                                    <span class="icon" style="background-position: 5px -99px;"></span>
+                                                    <span class="text">강릉</span>
+                                                </a>
+                                            
+                                            </li>
+
+                                            <li>
+                                                
+                                                <a href="#">
+                                                    <span class="icon" style="background-position: 5px -64px;"></span>
+                                                    <span class="text">장르만로맨스</span>
+                                                </a>
+                                            
+                                            </li><li>
+                                                
+                                                <a href="#">
+                                                    <span class="icon" style="background-position: 5px -64px;"></span>
+                                                    <span class="text">귀멸의 칼날</span>
+                                                </a>
+                                            
+                                            </li>
+
+                                            <li>
+                                                
+                                                <a href="#">
+                                                    <span class="icon" style="background-position: 5px 6px;"></span>
+                                                    <span class="text">아담패밀리2</span>
+                                                </a>
+                                            
+                                            </li>
+
+                                            <li>
+                                                
+                                                <a href="#">
+                                                    <span class="icon" style="background-position: 5px -64px;"></span>
+                                                    <span class="text">프렌치디스패치</span>
+                                                </a>
+                                            
+                                            </li>
+
+                                            <li>
+                                                
+                                                <a href="#">
+                                                    <span class="icon" style="background-position: 5px -29px;"></span>
+                                                    <span class="text">퍼스트카우</span>
+                                                </a>
+                                            
+                                            </li>
+
+                                            <li>
+                                                
+                                                <a href="#">
+                                                    <span class="icon" style="background-position: 5px -64px;"></span>
+                                                    <span class="text">아워미드나잇</span>
+                                                </a>
+                                            
+                                            </li>
+
+                                            <li>
+                                                
+                                                <a href="#">
+                                                    <span class="icon" style="background-position: 5px 6px;"></span>
+                                                    <span class="text">아네트</span>
+                                                </a>
+                                            
+                                            </li>
+                                        </ul>  
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="section section-theater">
+
+                            <div class="col-head">
+                                <h3 class="movie-tab">극장</h3>
+                            </div>
+                            
+                            <div class="col-body">
+                                <!-- 이부분은 제이쿼리로 ajax통신과 동시에 문서객체를 달아줄것이다.-->
+                                <div class="theater-select"> 
+                                    <div class="theater-list">
+                                        <ul>
+                                            <li><a href="#"><span class="text">서울(31)</span></a></li>
+                                            <li><a href="#"><span class="text">경기(53)</span></a></li>
+                                            <li><a href="#"><span class="text">인천(11)</span></a></li>
+                                            <li><a href="#"><span class="text">강원(4)</span></a></li>
+                                            <li><a href="#"><span class="text">대전/충청(23)</span></a></li>
+                                            <li><a href="#"><span class="text">대구(9)</span></a></li>
+                                            <li><a href="#"><span class="text">부산/울산(14)</span></a></li>
+                                            <li><a href="#"><span class="text">경상(19)</span></a></li>
+                                            <li><a href="#"><span class="text">광주/전라/제주(23)</span></a></li>
+                                            <ul class="sub-area-list">
+                                                <li>
+                                                    <a href="#">강남</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">강변</a>
+                                                </li>
+
+                                                <li>
+                                                    <a href="#">건대입구</a>
+                                                </li>
+
+                                                <li>
+                                                    <a href="#">구로</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">대학로</a>
+                                                </li>
+
+                                                <li>
+                                                    <a href="#">동대문</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">등촌</a>
+                                                </li>    
+                                                
+                                            </ul>
+                                        </ul>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="section section-time">
+                            <div class="col-head">
+                                <h3 class="movie-tab">시간</h3>
+                            </div>
+                            
+                            <div class="col-body">
+                                <div class="time-select">
+                                    <div class="time-list">
+                                        <ul>
+                                            <li>
+                                                
+                                                <a href="#">
+                                                    <span class="icon" style="background-position: 5px -29px;"></span>
+                                                    <span class="text">09:25 이터널스</span>
+                                                </a>
+                                            
+                                            </li>
+        
+                                            <li>
+                                                
+                                                <a href="#">
+                                                    <span class="icon" style="background-position: 5px -29px;"></span>
+                                                    <span class="text">12:00 이터널스</span>
+                                                </a>
+                                            
+                                            </li>
+        
+                                            <li>
+                                                
+                                                <a href="#">
+                                                    <span class="icon" style="background-position: 5px -99px;"></span>
+                                                    <span class="text">13:30 이터널스</span>
+                                                </a>
+                                            
+                                            </li>
+        
+                                            <li>
+                                                
+                                                <a href="#">
+                                                    <span class="icon" style="background-position: 5px -64px;"></span>
+                                                    <span class="text">15:00 이터널스</span>
+                                                </a>
+                                            
+                                            </li><li>
+                                                
+                                                <a href="#">
+                                                    <span class="icon" style="background-position: 5px -64px;"></span>
+                                                    <span class="text">16:25 이터널스</span>
+                                                </a>
+                                            
+                                            </li>
+        
+                                            <li>
+                                                
+                                                <a href="#">
+                                                    <span class="icon" style="background-position: 5px 6px;"></span>
+                                                    <span class="text">18:00 이터널스</span>
+                                                </a>
+                                            
+                                            </li>
+        
+                                            <li>
+                                                
+                                                <a href="#">
+                                                    <span class="icon" style="background-position: 5px -64px;"></span>
+                                                    <span class="text">19:25 이터널스</span>
+                                                </a>
+                                            
+                                            </li>
+        
+                                            <li>
+                                                
+                                                <a href="#">
+                                                    <span class="icon" style="background-position: 5px -29px;"></span>
+                                                    <span class="text">21:00 이터널스</span>
+                                                </a>
+                                            
+                                            </li>
+        
+                                            <li>
+                                                
+                                                <a href="#">
+                                                    <span class="icon" style="background-position: 5px -64px;"></span>
+                                                    <span class="text">22:25 이터널스</span>
+                                                </a>
+                                            
+                                            </li>
+        
+                                            <li>
+                                                
+                                                <a href="#">
+                                                    <span class="icon" style="background-position: 5px 6px;"></span>
+                                                    <span class="text">00:00 이터널스</span>
+                                                </a>
+                                            
+                                            </li>
+                                        </ul> 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+                    </div>
+                </div>
+                
+                <div class="final-selected">
+                    <div id="movie-selected">
+                        <h1>이터널스 > </h1>
+                    </div>
+                    <div id="area-selected">
+                        <h1>서울 ></h1>
+                    </div>
+                    <div id="theater-selected">
+                        <h1>강남 > </h1>
+                    </div>
+                    <div id="date-selected">
+                        <h1>2021 / 11 / 21  > </h1>
+                    </div>
+                    <div id="time-selected">
+                        <h1> 09:25  이터널스</h1>
+                    </div>
+                </div>
+                <style>
+                    
+                </style>
+                <div class="seat-area">
+                    <button type="button" class="go-seat"> 좌석 선택하러가기 </button>
+                </div>
+            </div>
+        </div>
     </div>
     
 </body>

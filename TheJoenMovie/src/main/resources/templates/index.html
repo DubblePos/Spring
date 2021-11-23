@@ -47,7 +47,7 @@
                 <div class="main-menu">
                     <ul class="menu-depth1">
                         <li>
-                            <a href="./view_total_movie.html">
+                            <a th:href="@{view_total_movie.html}">
                                 <img src="./img/movie_menu01.png">
                                 <h1 style="color:#120303;font-size:40px;">영화</h1>
                             </a>
@@ -115,12 +115,14 @@
                     <article th:each="movies : ${movieinfo}">
                         <a>
                             <div class="rank-movie-image">
-                                <img th:src="@{/img/강릉.png}" alt="rank1"/>
+                                <img th:src="@{/img/{poster}(poster=${movies.poster})}" alt="rank1"/>
                             </div>
                             <h2 style="color:white;font-size:30px;">[[${movies.title}]]</h2>
                             <p style="color:white;font-size:25px;">[[${movies.genre}]]</p>
                             <p style="color:white;font-size:25px;">[[${movies.director}]]</p>
-                            <p style="color:white;font-size:25px;">[[${movies.actor}]]</p>
+                            <p style="overflow : hidden; text-overflow : ellipsis ;color:white;font-size:25px;">[[${movies.actor}]]</p>
+                            <p style="color:white;font-size:25px;">[[${movies.rtime}]]분</p>
+                            <p style="color:white;font-size:25px;">[[${movies.rdate}]]개봉</p>
                             <h1 class="rating star5" style="color:white;font-size:20px;">평점 [[${movies.score}]]</h1>
                         </a>
                     </article>
