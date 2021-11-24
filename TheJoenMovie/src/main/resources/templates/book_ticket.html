@@ -15,7 +15,99 @@
     <link rel="stylesheet" th:href="@{/css/style.css}"/>
     <link rel="stylesheet" href="./css/header.css"/>
     <link rel="stylesheet" href="./css/main.css"/>
-    <link rel="stylesheet" href="./css/ticket.css"/>
+    <script>
+        $(document).ready(function(){
+            $('.slider > ul').bxSlider({
+                pager: false,
+                easing: 'linear',
+                auto: true, // 슬라이더 자동여부 
+
+                autoHover: true // 마우스를 위에 올렸을 경우 애니메이션 정지 
+
+                
+            });
+
+                
+        });
+
+    </script>
+    <style>
+            #header-img{
+                width: 51%;
+                height: 274px;
+                margin-top: -60px;
+                margin-right: 395px;
+                border: 1px solid black;
+                float: right;
+            } 
+            /* 빠른예매 선택 영역 */
+            main > section{
+                
+                width: 600px;
+                height: 800px;
+                margin-top:500px;
+                margin-right: 1100px;
+                text-align: center;
+                
+            }
+            /* 빠른예매 제목 */
+            main > section > .speed-ticket-title > h1{
+                font-size: 50px;
+                margin-bottom:60px;
+            }
+            /* 각 카테고리별 선택 공통사항 */
+            main > section > .select > h1{
+                font-size: 30px;
+                margin-top: 20px;
+            }
+            main > section > .select > .cate{
+                width: 600px;
+                height: 40px;
+                text-align: center;
+                margin: 40px auto;
+                border: 1px solid gray;
+                font-size: 20px;
+            }
+            main > section > .select > .cate > option{
+                
+                font-size: 20px;
+            }
+            
+            main > section > .select.select-seat > .screen-area{
+                width: 600px;
+                height: 50px;
+                line-height: 50px;
+                
+                border: 2px solid black;
+                background-color: black;
+            }
+            main > section > .select.select-seat > .screen-area > h1{
+                font-size: 30px;
+                color: white;
+            }
+            main > section > .select.select-seat > .check-seats > .digits{
+                width: 100%;
+                height: 30px;
+                margin: 40px auto;
+                border: 1px solid red;
+
+            }
+            main > section > .select.select-seat > .check-seats > .digits > p{
+                margin-top: 5px;
+            }
+            /* 좌석 체크 선택*/
+     
+            .select.select-seat .check-seats input{
+                width: 20px;
+                height: 20px;
+                margin: 5px 10px;
+                border: 1px solid black;
+                text-align: center;
+            }
+            .select.select-seat .check-seats .seat5{
+                margin-right: 50px;
+            }
+    </style>
 
 </head>
 <body>
@@ -24,7 +116,7 @@
             <h1 class="ci">
     
                 <a href="/" title="더조은무비 메인으로가기">
-                    <img src="./img/logo-image.png">
+                    <img src="./img/logo_image.png">
                 </a>
             </h1>
             <nav id="gnb">
@@ -33,363 +125,320 @@
                         <li>
                             <a href="./view_total_movie.html">
                                 <img src="./img/movie_menu01.png">
-                                <h1 style="color:#120303;font-size:40px;">영화</h1>
+                                <h1 style="color:#120303;font-size:25px; text-align: center;">영화</h1>
                             </a>
                             
                         </li>
                         <li>
                             <a href="./book_ticket.html">
                                 <img src="./img/ticket_menu01.png">
-                                <h1 style="color:#120303;font-size:40px">예매</h1>
+                                <h1 style="color:#120303;font-size:25px; text-align: center;">예매</h1>
                             </a>
-
-                            <ul id="ticket-depth2">
-                                <li><a href="./book_ticket.html" style="color: white; font-size: 25px;">빠른 예매</a></li>
-                                <li><a href="./view_timeline.html" style="color: white; font-size: 25px;">상영 시간</a></li>
-                            </ul>
-                        
                         </li>
                         <li>
                             
                             <a href="./view_event.html">
                                 <img src="./img/event_menu02.png" style="margin-left:20px;">
-                                <h1 style="color:#120303;font-size:40px">이벤트</h1>
+                                <h1 style="color:#120303;font-size:25px; text-align: center;">이벤트</h1>
                             </a>
                         </li>
                         <li>
                             
                             <a href="./member/login.html">
-                                <img src="./img/login-image.png" style="margin-left:10px;">
-                                <h1 style="color:#120303;font-size:40px">멤버쉽</h1>
+                                <img src="./img/login_image.png" style="margin-left:10px;">
+                                <h1 style="color:#120303;font-size:25px; text-align: center;">멤버쉽</h1>
                             </a>
-                            <ul id="login-depth2">
-                                <li><a href="./member/terms.html" style="color: white; font-size: 25px;">회원가입</a></li>
-                                <li><a href="./member/login.html" style="color: white; font-size: 25px;">로그인</a></li>
-                            </ul>
+                            
                         </li>
                     </ul>              
                 </div>
             </nav>
+            
         </header>
-        <div class="container">
-            <div class="ticket">
-                <div class="navi">
-                    <h1 id="speed-ticket" style="color:white;">빠른 예매</h1>
+        <style>
+            
+        </style>
+        <img id="header-img" src="./img/disneychristmas.png" alt="">
+        <style>
+            
+        </style>
+        <main>
+            <section>
+                <div class="speed-ticket-title">
+                    <h1>Speed Ticket</h1>
+                </div>
+                <div class="select select-movie">
+                    <h1><< 영화 >> </h1>
+                    <select class="cate" name="movie-cate">
+                        <option value="0">영화 선택</option>
+                    </select>
+
+                </div>
+                <div class="select select-cinema">
+                    <h1><< 영화관 >> </h1>
+                    <select class="cate" name="cinema-cate">
+                        
+                        <option value="0">영화관 선택</option>
+                    </select>
+
+                </div>
+                <div class="select select-theater">
+                    <h1><< 날짜 >> </h1>
+                    <select class="cate" name="theater-cate">
+                        <option value="0">날짜 선택</option>
+                    </select>
+
+                </div>
+                <div class="select select-time">
+                    <h1><< 시간 >> </h1>
+                    <select class="cate" name="time-cate">
+                        <option value="0">시간 선택</option>
+                    </select>
                 </div>
                 <style>
                     
+
+
                 </style>
-                <div class="date-select">
-                    <div class="date-list">
-                        <div class="year-area" style="color:white">2021.11</div>
-                        <div class="date-area">
-                            <button type="button" id="before" > < </button>
-                            <button type="button" class="week mon"> 22 월 </button>
-                            <button type="button" class="week ue"> 23 화 </button>
-                            <button type="button" class="week wen"> 24 수 </button>
-                            <button type="button" class="week thu"> 25 목 </button>
-                            <button type="button" class="week fri"> 26 금 </button>
-                            <button type="button" class="week sat"> 27 토 </button>
-                            <button type="button" class="week sun"> 28 일 </button>
-                            <button type="button" class="week mon"> 29 월 </button>
-                            <button type="button" class="week tue"> 30 화 </button>  
-                            <button type="button" id="after">  >  </button>
-                        </div>
+                <div class="select select-seat">
+                    <h1><< 좌석 선택 >> </h1>
+                    <select class="cate" name="seat-cate">
+                        <option value="0">좌석 인원 선택</option>
+                    </select>
+                    <div class="screen-area">
+                        <h1>Screen</h1>
                     </div>
-                </div>
-                <div class="steps">
-                    <div class="step step1">
-                        <div class="section section-movie">
-                            <div class="col-head">
-                                <h3 class="movie-tab">영화</h3>
-                            </div>
-                            
-                            <div class="col-body">
-                                <div class="movie-select">
-                                    <div class="movie-list">
-                                        <ul>
-                                            <li>
-                                                
-                                                <a href="#">
-                                                    <span class="icon" style="background-position: 5px -29px;"></span>
-                                                    <span class="text">이터널스</span>
-                                                </a>
-                                            
-                                            </li>
-
-                                            <li>
-                                                
-                                                <a href="#">
-                                                    <span class="icon" style="background-position: 5px -29px;"></span>
-                                                    <span class="text">듄</span>
-                                                </a>
-                                            
-                                            </li>
-
-                                            <li>
-                                                
-                                                <a href="#">
-                                                    <span class="icon" style="background-position: 5px -99px;"></span>
-                                                    <span class="text">강릉</span>
-                                                </a>
-                                            
-                                            </li>
-
-                                            <li>
-                                                
-                                                <a href="#">
-                                                    <span class="icon" style="background-position: 5px -64px;"></span>
-                                                    <span class="text">장르만로맨스</span>
-                                                </a>
-                                            
-                                            </li><li>
-                                                
-                                                <a href="#">
-                                                    <span class="icon" style="background-position: 5px -64px;"></span>
-                                                    <span class="text">귀멸의 칼날</span>
-                                                </a>
-                                            
-                                            </li>
-
-                                            <li>
-                                                
-                                                <a href="#">
-                                                    <span class="icon" style="background-position: 5px 6px;"></span>
-                                                    <span class="text">아담패밀리2</span>
-                                                </a>
-                                            
-                                            </li>
-
-                                            <li>
-                                                
-                                                <a href="#">
-                                                    <span class="icon" style="background-position: 5px -64px;"></span>
-                                                    <span class="text">프렌치디스패치</span>
-                                                </a>
-                                            
-                                            </li>
-
-                                            <li>
-                                                
-                                                <a href="#">
-                                                    <span class="icon" style="background-position: 5px -29px;"></span>
-                                                    <span class="text">퍼스트카우</span>
-                                                </a>
-                                            
-                                            </li>
-
-                                            <li>
-                                                
-                                                <a href="#">
-                                                    <span class="icon" style="background-position: 5px -64px;"></span>
-                                                    <span class="text">아워미드나잇</span>
-                                                </a>
-                                            
-                                            </li>
-
-                                            <li>
-                                                
-                                                <a href="#">
-                                                    <span class="icon" style="background-position: 5px 6px;"></span>
-                                                    <span class="text">아네트</span>
-                                                </a>
-                                            
-                                            </li>
-                                        </ul>  
-                                        
-                                    </div>
-                                </div>
-                            </div>
+                    <div class="check-seats">
+                     
+                        <div class="no-seats">
+                        	<input class="seat0" type="text" name="1" style="border: 1px solid white;">
+                            <input class="seat1" type="text" name="1" value="1">
+                            <input class="seat2" type="text" name="2" value="2">
+                            <input class="seat3" type="text" name="3" value="3">
+                            <input class="seat4" type="text" name="4" value="4">
+                            <input class="seat5" type="text" name="5" value="5">
+                            <input class="seat6" type="text" name="6" value="6">
+                            <input class="seat7" type="text" name="7" value="7">
+                            <input class="seat8" type="text" name="8" value="8">
+                            <input class="seat9" type="text" name="9" value="9">
+                            <input class="seat10" type="text" name="10" value="10">
                         </div>
-                        <div class="section section-theater">
-
-                            <div class="col-head">
-                                <h3 class="movie-tab">극장</h3>
-                            </div>
-                            
-                            <div class="col-body">
-                                <!-- 이부분은 제이쿼리로 ajax통신과 동시에 문서객체를 달아줄것이다.-->
-                                <div class="theater-select"> 
-                                    <div class="theater-list">
-                                        <ul>
-                                            <li><a href="#"><span class="text">서울(31)</span></a></li>
-                                            <li><a href="#"><span class="text">경기(53)</span></a></li>
-                                            <li><a href="#"><span class="text">인천(11)</span></a></li>
-                                            <li><a href="#"><span class="text">강원(4)</span></a></li>
-                                            <li><a href="#"><span class="text">대전/충청(23)</span></a></li>
-                                            <li><a href="#"><span class="text">대구(9)</span></a></li>
-                                            <li><a href="#"><span class="text">부산/울산(14)</span></a></li>
-                                            <li><a href="#"><span class="text">경상(19)</span></a></li>
-                                            <li><a href="#"><span class="text">광주/전라/제주(23)</span></a></li>
-                                            <ul class="sub-area-list">
-                                                <li>
-                                                    <a href="#">강남</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#">강변</a>
-                                                </li>
-
-                                                <li>
-                                                    <a href="#">건대입구</a>
-                                                </li>
-
-                                                <li>
-                                                    <a href="#">구로</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#">대학로</a>
-                                                </li>
-
-                                                <li>
-                                                    <a href="#">동대문</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#">등촌</a>
-                                                </li>    
-                                                
-                                            </ul>
-                                        </ul>
-
-                                    </div>
-
-                                </div>
-                            </div>
+                        <div class="A-seats">
+                            <input class="seat1" type="text" name="A" value="A">
+                            <input class="seat1" type="checkbox" name="A1">
+                            <input class="seat2" type="checkbox" name="A2">
+                            <input class="seat3" type="checkbox" name="A3">
+                            <input class="seat4" type="checkbox" name="A4">
+                            <input class="seat5" type="checkbox" name="A5">
+                            <input class="seat6" type="checkbox" name="A6">
+                            <input class="seat7" type="checkbox" name="A7">
+                            <input class="seat8" type="checkbox" name="A8">
+                            <input class="seat9" type="checkbox" name="A9">
+                            <input class="seat10" type="checkbox" name="A10">
                         </div>
+                        <div class="B-seats">
+                            <input class="seat1" type="text" name="A" value="B">
+                            <input class="seat1" type="checkbox" name="B1">
+                            <input class="seat2" type="checkbox" name="B2">
+                            <input class="seat3" type="checkbox" name="B3">
+                            <input class="seat4" type="checkbox" name="B4">
+                            <input class="seat5" type="checkbox" name="B5">
+                            <input class="seat6" type="checkbox" name="B6">
+                            <input class="seat7" type="checkbox" name="B7">
+                            <input class="seat8" type="checkbox" name="B8">
+                            <input class="seat9" type="checkbox" name="B9">
+                            <input class="seat10" type="checkbox" name="B10">
+                        </div>
+                        <div class="C-seats">
+                            <input class="seat1" type="text" name="A" value="C">
+                            <input class="seat1" type="checkbox" name="C1">
+                            <input class="seat2" type="checkbox" name="C2">
+                            <input class="seat3" type="checkbox" name="C3">
+                            <input class="seat4" type="checkbox" name="C4">
+                            <input class="seat5" type="checkbox" name="C5">
+                            <input class="seat6" type="checkbox" name="C6">
+                            <input class="seat7" type="checkbox" name="C7">
+                            <input class="seat8" type="checkbox" name="C8">
+                            <input class="seat9" type="checkbox" name="C9">
+                            <input class="seat10" type="checkbox" name="C10">
+                        </div>
+                        <div class="D-seats">
+                            <input class="seat1" type="text" name="A" value="D">
+                            <input class="seat1" type="checkbox" name="D1">
+                            <input class="seat2" type="checkbox" name="D2">
+                            <input class="seat3" type="checkbox" name="D3">
+                            <input class="seat4" type="checkbox" name="D4">
+                            <input class="seat5" type="checkbox" name="D5">
+                            <input class="seat6" type="checkbox" name="D6">
+                            <input class="seat7" type="checkbox" name="D7">
+                            <input class="seat8" type="checkbox" name="D8">
+                            <input class="seat9" type="checkbox" name="D9">
+                            <input class="seat10" type="checkbox" name="D10">
+                        </div>
+                        <div class="E-seats">
+                            <input class="seat1" type="text" name="A" value="E">
+                            <input class="seat1" type="checkbox" name="E1">
+                            <input class="seat2" type="checkbox" name="E2">
+                            <input class="seat3" type="checkbox" name="E3">
+                            <input class="seat4" type="checkbox" name="E4">
+                            <input class="seat5" type="checkbox" name="E5">
+                            <input class="seat6" type="checkbox" name="E6">
+                            <input class="seat7" type="checkbox" name="E7">
+                            <input class="seat8" type="checkbox" name="E8">
+                            <input class="seat9" type="checkbox" name="E9">
+                            <input class="seat10" type="checkbox" name="E10">
+                        </div>
+                        <div class="F-seats">
+                            <input class="seat1" type="text" name="A" value="F">
                         
-                        <div class="section section-time">
-                            <div class="col-head">
-                                <h3 class="movie-tab">시간</h3>
-                            </div>
-                            
-                            <div class="col-body">
-                                <div class="time-select">
-                                    <div class="time-list">
-                                        <ul>
-                                            <li>
-                                                
-                                                <a href="#">
-                                                    <span class="icon" style="background-position: 5px -29px;"></span>
-                                                    <span class="text">09:25 이터널스</span>
-                                                </a>
-                                            
-                                            </li>
-        
-                                            <li>
-                                                
-                                                <a href="#">
-                                                    <span class="icon" style="background-position: 5px -29px;"></span>
-                                                    <span class="text">12:00 이터널스</span>
-                                                </a>
-                                            
-                                            </li>
-        
-                                            <li>
-                                                
-                                                <a href="#">
-                                                    <span class="icon" style="background-position: 5px -99px;"></span>
-                                                    <span class="text">13:30 이터널스</span>
-                                                </a>
-                                            
-                                            </li>
-        
-                                            <li>
-                                                
-                                                <a href="#">
-                                                    <span class="icon" style="background-position: 5px -64px;"></span>
-                                                    <span class="text">15:00 이터널스</span>
-                                                </a>
-                                            
-                                            </li><li>
-                                                
-                                                <a href="#">
-                                                    <span class="icon" style="background-position: 5px -64px;"></span>
-                                                    <span class="text">16:25 이터널스</span>
-                                                </a>
-                                            
-                                            </li>
-        
-                                            <li>
-                                                
-                                                <a href="#">
-                                                    <span class="icon" style="background-position: 5px 6px;"></span>
-                                                    <span class="text">18:00 이터널스</span>
-                                                </a>
-                                            
-                                            </li>
-        
-                                            <li>
-                                                
-                                                <a href="#">
-                                                    <span class="icon" style="background-position: 5px -64px;"></span>
-                                                    <span class="text">19:25 이터널스</span>
-                                                </a>
-                                            
-                                            </li>
-        
-                                            <li>
-                                                
-                                                <a href="#">
-                                                    <span class="icon" style="background-position: 5px -29px;"></span>
-                                                    <span class="text">21:00 이터널스</span>
-                                                </a>
-                                            
-                                            </li>
-        
-                                            <li>
-                                                
-                                                <a href="#">
-                                                    <span class="icon" style="background-position: 5px -64px;"></span>
-                                                    <span class="text">22:25 이터널스</span>
-                                                </a>
-                                            
-                                            </li>
-        
-                                            <li>
-                                                
-                                                <a href="#">
-                                                    <span class="icon" style="background-position: 5px 6px;"></span>
-                                                    <span class="text">00:00 이터널스</span>
-                                                </a>
-                                            
-                                            </li>
-                                        </ul> 
-                                    </div>
-                                </div>
-                            </div>
+                            <input class="seat1" type="checkbox" name="F1">
+                            <input class="seat2" type="checkbox" name="F2">
+                            <input class="seat3" type="checkbox" name="F3">
+                            <input class="seat4" type="checkbox" name="F4">
+                            <input class="seat5" type="checkbox" name="F5">
+                            <input class="seat6" type="checkbox" name="F6">
+                            <input class="seat7" type="checkbox" name="F7">
+                            <input class="seat8" type="checkbox" name="F8">
+                            <input class="seat9" type="checkbox" name="F9">
+                            <input class="seat10" type="checkbox" name="F10">
+                        </div>
+                        <div class="G-seats">
+                            <input class="seat1" type="text" name="A" value="G">
+                            <input class="seat1" type="checkbox" name="G1">
+                            <input class="seat2" type="checkbox" name="G2">
+                            <input class="seat3" type="checkbox" name="G3">
+                            <input class="seat4" type="checkbox" name="G4">
+                            <input class="seat5" type="checkbox" name="G5">
+                            <input class="seat6" type="checkbox" name="G6">
+                            <input class="seat7" type="checkbox" name="G7">
+                            <input class="seat8" type="checkbox" name="G8">
+                            <input class="seat9" type="checkbox" name="G9">
+                            <input class="seat10" type="checkbox" name="G10">
+                        </div>
+                        <div class="H-seats">
+                            <input class="seat1" type="text" name="A" value="H">
+                            <input class="seat1" type="checkbox" name="H1">
+                            <input class="seat2" type="checkbox" name="H2">
+                            <input class="seat3" type="checkbox" name="H3">
+                            <input class="seat4" type="checkbox" name="H4">
+                            <input class="seat5" type="checkbox" name="H5">
+                            <input class="seat6" type="checkbox" name="H6">
+                            <input class="seat7" type="checkbox" name="H7">
+                            <input class="seat8" type="checkbox" name="H8">
+                            <input class="seat9" type="checkbox" name="H9">
+                            <input class="seat10" type="checkbox" name="H10">
+                        </div>
+                        <div class="I-seats">
+                            <input class="seat1" type="text" name="A" value="I">
+                            <input class="seat1" type="checkbox" name="I1">
+                            <input class="seat2" type="checkbox" name="I2">
+                            <input class="seat3" type="checkbox" name="I3">
+                            <input class="seat4" type="checkbox" name="I4">
+                            <input class="seat5" type="checkbox" name="I5">
+                            <input class="seat6" type="checkbox" name="I6">
+                            <input class="seat7" type="checkbox" name="I7">
+                            <input class="seat8" type="checkbox" name="I8">
+                            <input class="seat9" type="checkbox" name="I9">
+                            <input class="seat10" type="checkbox" name="I10">
+                        </div>
+                        <div class="J-seats">
+                            <input class="seat1" type="text" name="A" value="J">
+                            <input class="seat1" type="checkbox" name="J1">
+                            <input class="seat2" type="checkbox" name="J2">
+                            <input class="seat3" type="checkbox" name="J3">
+                            <input class="seat4" type="checkbox" name="J4">
+                            <input class="seat5" type="checkbox" name="J5">
+                            <input class="seat6" type="checkbox" name="J6">
+                            <input class="seat7" type="checkbox" name="J7">
+                            <input class="seat8" type="checkbox" name="J8">
+                            <input class="seat9" type="checkbox" name="J9">
+                            <input class="seat10" type="checkbox" name="J10">
                         </div>
 
-
-
+                        
 
                     </div>
                 </div>
                 
-                <div class="final-selected">
-                    <div id="movie-selected">
-                        <h1>이터널스 > </h1>
-                    </div>
-                    <div id="area-selected">
-                        <h1>서울 ></h1>
-                    </div>
-                    <div id="theater-selected">
-                        <h1>강남 > </h1>
-                    </div>
-                    <div id="date-selected">
-                        <h1>2021 / 11 / 21  > </h1>
-                    </div>
-                    <div id="time-selected">
-                        <h1> 09:25  이터널스</h1>
-                    </div>
-                </div>
-                <style>
+            </section>
+            
+            <style>
+
+                .final-pay{
+                    float: right;
+                    width: 500px;
+                    height: 900px;
                     
-                </style>
-                <div class="seat-area">
-                    <button type="button" class="go-seat"> 좌석 선택하러가기 </button>
+                    margin-top:-780px;
+                    margin-right: 300px;
+                }
+                .final-pay .final-cate .title{
+                    display: block;
+                    width: 70px;
+                    height: 30px;
+                    
+                    margin-top: 30px;
+                    font-weight: bolder;
+
+                }
+                .final-pay .final-cate .value{
+                    
+                    float: right;
+                    
+                    
+
+
+                }
+                .point-info{
+                    margin-top: 80px;
+                    
+                }
+                .point-info p{
+                    font-size: 18px;
+                }
+            </style>
+            <div class="final-pay">
+                <h1 style="font-size: 40px; text-align: center;"> 예매내역 </h1>
+                <div class="final-cate final-movie">
+                    <span class="title movie-title"style="font-size: 20px;"> 영화 </span>
+                    <span class="value movie-value"style="font-size: 20px;"> 이터널스 </span>
+
                 </div>
+                <div class="final-cate final-movie">
+                    <span class="title theater-title" style="font-size: 20px;"> 영화관 </span>
+                    <span class="value theater-value" style="font-size: 20px;"> 더조은강남 </span>
+
+                </div>
+                <div class="final-cate final-movie">
+                    <span class="title date-title" style="font-size: 20px;"> 날짜 </span>
+                    <span class="value date-value" style="font-size: 20px;"> 2021-11-24 </span>
+
+                </div>
+                <div class="final-cate final-movie">
+                    <span class="title time-title" style="font-size: 20px;"> 시간 </span>
+                    <span class="value time-value" style="font-size: 20px;"> (2관)09:30 </span>
+
+                </div>
+                <div class="final-cate final-movie">
+                    <span class="title seat-title" style="font-size: 20px;"> 좌석 </span>
+                    <span class="value seat-value" style="font-size: 20px;"> A1 </span>
+
+                </div>
+                <div class="final-cate final-movie">
+                    <span class="title price-title" style="font-size: 20px;"> 가격 </span>
+                    <span class="value price-value" style="font-size: 20px;"> 12000(원) </span>
+                </div>
+                <div class="point-info">
+                    <p>보유 포인트가 1,000점이상일 경우에만 사용가능합니다.<br>
+                        티켓하나당 100점이 적립이 됩니다.
+                    </p>
+                    <span>보유포인트: &nbsp;</span>
+                    <span>400점 </span>
+
+                </div>
+                <button type="submit"> 결제 하기 </button>
             </div>
-        </div>
+        </main>
     </div>
-    
 </body>
 </html>

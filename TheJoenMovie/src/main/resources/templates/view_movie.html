@@ -1,9 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TheJoen Movie</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
@@ -12,10 +10,8 @@
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
-    <link rel="stylesheet" th:href="@{/css/style.css}"/>
-    <link rel="stylesheet" href="./css/header.css"/>
-    <link rel="stylesheet" href="./css/main.css"/>
-
+    <link rel="stylesheet" th:href="@{/css/main.css}"/>
+    <link rel="stylesheet" th:href="@{/css/header.css}"/>
     <script>
         $(document).ready(function(){
           $('.slider > ul').bxSlider({
@@ -44,45 +40,48 @@
                         <li>
                             <a href="./view_total_movie.html">
                                 <img src="./img/movie_menu01.png">
-                                <h1 style="color:#120303;font-size:40px;">영화</h1>
+                                <h1 style="color:#120303;font-size:25px;text-align: center;">영화</h1>
                             </a>
                             
                         </li>
                         <li>
                             <a href="./book_ticket.html">
                                 <img src="./img/ticket_menu01.png">
-                                <h1 style="color:#120303;font-size:40px">예매</h1>
+                                <h1 style="color:#120303;font-size:25px; text-align: center;">예매</h1>
                             </a>
-
-                            <ul id="ticket-depth2">
-                                <li><a href="./book_ticket.html" style="color: white; font-size: 25px;">빠른 예매</a></li>
-                                <li><a href="./view_timeline.html" style="color: white; font-size: 25px;">상영 시간</a></li>
-                            </ul>
                         
                         </li>
                         <li>
                             
                             <a href="./view_event.html">
                                 <img src="./img/event_menu02.png" style="margin-left:20px;">
-                                <h1 style="color:#120303;font-size:40px">이벤트</h1>
+                                <h1 style="color:#120303;font-size:25px; text-align: center;">이벤트</h1>
                             </a>
                         </li>
                         <li>
                             
                             <a href="./member/login.html">
-                                <img src="./img/login-image.png" style="margin-left:10px;">
-                                <h1 style="color:#120303;font-size:40px">멤버쉽</h1>
+                                <img src="./img/login_image.png" style="margin-left:10px;">
+                                <h1 style="color:#120303;font-size:25px; text-align: center;">멤버쉽</h1>
                             </a>
-                            <ul id="login-depth2">
-                                <li><a href="./member/terms.html" style="color: white; font-size: 25px;">회원가입</a></li>
-                                <li><a href="./member/login.html" style="color: white; font-size: 25px;">로그인</a></li>
-                            </ul>
+                            
                         </li>
                     </ul>              
                 </div>
             </nav>
             
         </header>
+        <style>
+            #header-img{
+                width: 51%;
+                height: 274px;
+                margin-top: 40px;
+                margin-right: 395px;
+                border: 1px solid black;
+                float: right;
+            } 
+        </style>
+        <img id="header-img" src="./img/disneychristmas.png" alt="">
     </div>
     
 </body>

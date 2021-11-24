@@ -25,4 +25,24 @@ public class MainController {
 		
 		return "/index";
 	}
+	
+	@GetMapping("/view_event")
+	public String event(){
+		return "/view_event";
+	}
+	
+	@GetMapping("/view_movie")
+	public String movie(){
+		return "/view_movie";
+	}
+	
+	@GetMapping("/view_total_movie")
+	public String total_movie(){
+		return "/view_total_movie";
+	}
+	
+	@GetMapping("/book_ticket")
+	public String book_ticket(){
+		return "/book_ticket";
+	}
 }

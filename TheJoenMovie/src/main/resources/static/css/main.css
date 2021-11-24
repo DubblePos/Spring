@@ -14,20 +14,15 @@ main > section > #search > input[name=keyword]{
     height: 50px;
     font-size: 20px;
     text-align: center;
+    border: 1px solid black;
 }
 main > section > #search > button{
     position: absolute;
     top: 0px;
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 52px;
+    border: 1px solid black;
 }
-
-
-
-
-
-
-
 
 
 /* 슬라이더 영역 */
@@ -43,8 +38,8 @@ main > section > #search > button{
     
 }
 .slider img{
-    width: 100%;
-    height: 700px;
+    width: 101%;
+    height: 691px;
 }
 .slider > .bx-wrapper {
     -moz-box-shadow: none;
@@ -58,6 +53,7 @@ main > section > #search > button{
 
 
 /* 메인 박스오피스 영화 TOP 10 */
+
 main > section {
     float: right;
     width: 1750px;
@@ -78,7 +74,7 @@ main > section > .rank{
     
 }
 main > section > .rank > h1{
-    margin-left: 670px;
+    margin-left: 742px;
 
 }
 main > section > section > article {
@@ -90,7 +86,6 @@ main > section > section > article {
 
     height: auto;
     
-
 }
 
 

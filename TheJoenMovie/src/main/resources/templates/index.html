@@ -2,8 +2,6 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TheJoen Movie</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
@@ -12,102 +10,89 @@
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
-    <link rel="stylesheet" th:href="@{/css/style.css}"/>
-    <link rel="stylesheet" href="./css/header.css"/>
-    <link rel="stylesheet" href="./css/main.css"/>
-    <style>
-       
-
-    </style>
-
+    <link rel="stylesheet" th:href="@{/css/main.css}"/>
+    <link rel="stylesheet" th:href="@{/css/header.css}"/>
+    <link rel="stylesheet" th:href="@{/css/ticket.css}"/>
+    <link rel="stylesheet" th:href="@{/css/seat.css}"/>
     <script>
         $(document).ready(function(){
-          $('.slider > ul').bxSlider({
-              pager: false,
-              easing: 'linear',
-              auto: true, // 슬라이더 자동여부 
+            $('.slider > ul').bxSlider({
+                pager: false,
+                easing: 'linear',
+                auto: true, // 슬라이더 자동여부 
 
-              autoHover: true // 마우스를 위에 올렸을 경우 애니메이션 정지 
-          });
-          
+                autoHover: true // 마우스를 위에 올렸을 경우 애니메이션 정지 
+            });
         });
     </script>
-
 </head>
 <body>
     <div class="body-wrap">
         <header id="header">
             <h1 class="ci">
-    
                 <a href="/" title="더조은무비 메인으로가기">
-                    <img src="img/logo-image.png">
+                    <img th:src="@{/img/logo_image.png}">
                 </a>
             </h1>
             <nav id="gnb">
                 <div class="main-menu">
                     <ul class="menu-depth1">
                         <li>
-                            <a th:href="@{view_total_movie.html}">
-                                <img src="./img/movie_menu01.png">
-                                <h1 style="color:#120303;font-size:40px;">영화</h1>
+                            <a th:href="@{/view_total_movie}">
+                                <img th:src="@{/img/movie_menu01.png}">
+                                <h1 style="color:#120303;font-size:25px; text-align: center;">영화</h1>
                             </a>
                             
                         </li>
                         <li>
-                            <a href="./view_event.html">
-                                <img src="./img/ticket_menu01.png">
-                                <h1 style="color:#120303;font-size:40px">예매</h1>
+                            <a th:href="@{/book_ticket}">
+                                <img th:src="@{/img/ticket_menu01.png}">
+                                <h1 style="color:#120303;font-size:25px; text-align: center;">예매</h1>
                             </a>
-
-                            <ul id="ticket-depth2">
-                                <li><a href="./book_ticket.html" style="color: white; font-size: 25px;">빠른 예매</a></li>
-                                <li><a href="./view_timeline.html" style="color: white; font-size: 25px;">상영 시간</a></li>
-                            </ul>
                         
                         </li>
                         <li>
-                            
-                            <a href="./view_event.html">
-                                <img src="./img/event_menu02.png" style="margin-left:20px;">
-                                <h1 style="color:#120303;font-size:40px">이벤트</h1>
+                            <a th:href="@{/view_event}">
+                                <img th:src="@{/img/event_menu02.png}" style="margin-left:20px;">
+                                <h1 style="color:#120303;font-size:25px; text-align: center;">이벤트</h1>
                             </a>
                         </li>
                         <li>
-                            
-                            <a href="./member/login.html">
-                                <img src="./img/login-image.png" style="margin-left:10px;">
-                                <h1 style="color:#120303;font-size:40px">멤버쉽</h1>
+                            <a th:href="@{/member/login}">
+                                <img th:src="@{/img/login_image.png}" style="margin-left:10px;">
+                                <h1 style="color:#120303;font-size:25px; text-align: center;">멤버쉽</h1>
                             </a>
-                            <ul id="login-depth2">
-                                <li><a href="./member/terms.html" style="color: white; font-size: 25px;">회원가입</a></li>
-                                <li><a href="./member/register.html" style="color: white; font-size: 25px;">로그인</a></li>
-                            </ul>
                         </li>
                     </ul>              
                 </div>
-
-
-
             </nav>
-            
         </header>
-
-        <main>
+        <style>
+            #header-img{
+                width: 51%;
+                height: 274px;
+                margin-top: -60px;
+                margin-right: 395px;
+                border: 1px solid black;
+                float: right;
+            } 
+        </style>
+        <img id="header-img" th:src="@{/img/disneychristmas.png}" alt="">
+        <main style="margin-top:100px;">
             <section>
                 
                 <form id="search" action="/">
                     <input type="text" name="keyword" placeholder="영화제목을 입력해주세요"/>
-                    <button type="submit"><img src="./img/search-button.jpg" style="width:50px;height: 50px;"></button>
+                    <button type="submit"><img th:src="@{/img/search_logo.png}" style="width:50px;height: 50px;"></button>
                 </form>    
 
                 <!-- 슬라이더 영역-->
                 <section class="slider">
                     <ul>
-                        <li><a href="/#"><img src="./img/slider-item01.jpg" alt="item1"></a></li>
-                        <li><a href="/#"><img src="./img/slider-item02.jpg" alt="item2"></a></li>
-                        <li><a href="/#"><img src="./img/slider-item03.jpg" alt="item3"></a></li>
-                        <li><a href="/#"><img src="./img/slider-item04.png" alt="item4"></a></li>
-                        
+                        <li><a href="/#"><img th:src="@{/img/slider-item01.jpg}" alt="item1"></a></li>
+                        <li><a href="/#"><img th:src="@{/img/slider-item02.jpg}" alt="item2"></a></li>
+                        <li><a href="/#"><img th:src="@{/img/slider-item03.jpg}" alt="item3"></a></li>
+                        <li><a href="/#"><img th:src="@{/img/slider-item04.png}" alt="item4"></a></li>
                     </ul>
                 </section>
                 <section class="rank">
@@ -116,14 +101,14 @@
                         <a>
                             <div class="rank-movie-image">
                                 <img th:src="@{/img/{poster}(poster=${movies.poster})}" alt="rank1"/>
+                                <h2 style="color:black;font-size:30px;">[[${movies.title}]]</h2>
+	                            <p style="color:black;font-size:25px;">[[${movies.genre}]]</p>
+	                            <p style="color:black;font-size:25px;">[[${movies.director}]]</p>
+	                            <!-- <p style="color:black;font-size:25px;">[[${movies.actor}]]</p> -->
+	                            <p style="color:black;font-size:25px;">[[${movies.rtime}]]분</p>
+	                            <p style="color:black;font-size:25px;">[[${movies.rdate}]]개봉</p>
+	                            <h1 class="rating star5" style="color:black;font-size:20px;">평점 [[${movies.score}]]</h1>
                             </div>
-                            <h2 style="color:white;font-size:30px;">[[${movies.title}]]</h2>
-                            <p style="color:white;font-size:25px;">[[${movies.genre}]]</p>
-                            <p style="color:white;font-size:25px;">[[${movies.director}]]</p>
-                            <p style="overflow : hidden; text-overflow : ellipsis ;color:white;font-size:25px;">[[${movies.actor}]]</p>
-                            <p style="color:white;font-size:25px;">[[${movies.rtime}]]분</p>
-                            <p style="color:white;font-size:25px;">[[${movies.rdate}]]개봉</p>
-                            <h1 class="rating star5" style="color:white;font-size:20px;">평점 [[${movies.score}]]</h1>
                         </a>
                     </article>
                 </section>

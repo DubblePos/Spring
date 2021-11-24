@@ -8,6 +8,7 @@ public class MovieVo {
 	public String title;
 	public float score;
 	public String genre;
+	public String grade;
 	public String director;
 	public String actor;
 	public String rtime;
